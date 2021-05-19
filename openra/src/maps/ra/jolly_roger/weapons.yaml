@@ -1,0 +1,45 @@
+flintlock:
+	Inherits: ^SnipeWeapon
+	ReloadDelay: 9
+	Range: 9c0
+	Warhead@1Dam: SpreadDamage
+		Damage: 6000
+	Warhead@2Eff: CreateEffect
+		Explosions: piff
+		ValidTargets: Ground, Ship, Air, Trees
+	Warhead@3EffWater: CreateEffect
+		Explosions: water_piff
+		ValidTargets: Water, Underwater
+		InvalidTargets: Ship, Structure, Bridge
+
+cabol:
+	Inherits: ^Cannon
+	Report: tank5.aud
+	TargetActorCenter: true
+	ReloadDelay: 165
+	Range: 14c0
+	MinRange: 4c0
+	Projectile: Bullet
+		Speed: 900
+		ContrailLength: 50
+		Blockable: false
+		LaunchAngle: 16
+		Inaccuracy: 1c0
+	ValidTargets: Ground, Water, Air, GroundActor, WaterActor, AirborneActor
+	Warhead@1Dam: SpreadDamage
+		Spread: 256
+		Damage: 24000
+		Versus:
+			None: 90
+			Wood: 75
+			Light: 60
+			Heavy: 45
+			Concrete: 100
+		ValidTargets: Ground, Water, Air, GroundActor, WaterActor, AirborneActor
+		DamageTypes: Prone50Percent, TriggerProne, SmallExplosionDeath
+	Warhead@3Eff: CreateEffect
+		Explosions: artillery_explosion
+		ImpactSounds: kaboom15.aud
+	Warhead@4EffWater: CreateEffect
+		Explosions: large_splash
+

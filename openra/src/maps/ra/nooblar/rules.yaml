@@ -1,0 +1,169 @@
+World:
+	SpawnMPUnits:
+	MPStartLocations:
+	LuaScript:
+		Scripts: nooblar.lua
+
+^DINO:
+	Inherits: ^Soldier
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Valued:
+		Cost: 1000
+	Tooltip:
+		Name: Dinosaur
+		GenericName: Dinosaur
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		Queue: Infantry
+		BuildAtProductionType: Soldier
+		BuildPaletteOrder: 1500
+		Prerequisites: ~bio,~miss
+	RevealsShroud:
+		Range: 6c0
+	Mobile:
+		Locomotor: foot
+		Voice: Move
+	Wanders:
+		MinMoveDelay: 80
+		MaxMoveDelay: 120
+	Selectable:
+		Bounds: 24,24,0,-5
+		DecorationBounds: 30,30,0,-2
+	-Crushable:
+	RenderSprites:
+		Palette: desert
+	QuantizeFacingsFromSequence:
+		Sequence: stand
+	WithInfantryBody:
+		StandSequences: stand,stand2
+		IdleSequences: stand,stand2
+		DefaultAttackSequence: attack
+	WithDeathAnimation:
+		UseDeathTypeSuffix: false
+	MapEditorData:
+		Categories: Dinosaur
+	AttackMove:
+		Voice: Attack
+	AttackFrontal:
+		Voice: Attack
+	DeathSounds:
+	Voiced:
+		VoiceSet: DinoVoice
+	HitShape:
+		Type: Circle
+			Radius: 390
+
+TREX:
+	Inherits: ^DINO
+	Tooltip:
+		Name: Tyrannosaurus rex
+	Armor:
+		Type: Light
+	Armament:
+		Weapon: DinoTeeth
+	Buildable:
+		Description: Bipedal carnivore with a massive skull
+	Health:
+		HP: 35000
+	Mobile:
+		Speed: 50
+	AutoTarget:
+		ScanRadius: 7
+
+RAPT:
+	Inherits: ^DINO
+	Tooltip:
+		Name: Velociraptor
+	Armor:
+		Type: Wood
+	Armament:
+		Weapon: DinoClaw
+	Buildable:
+		Description: Bipedal with enlarged sickle-shaped claw on each foot
+	Health:
+		HP: 9000
+	Mobile:
+		Speed: 80
+	TakeCover:
+		ProneOffset: 256,64,-331
+	AutoTarget:
+		ScanRadius: 20
+
+STEG:
+	Inherits: ^DINO
+	Tooltip:
+		Name: Stegosaurus
+	Armor:
+		Type: Light
+	Armament:
+		Weapon: DinoTail
+	WithDeathAnimation:
+	Buildable:
+		Description: A large, heavily built, herbivorous quadruped
+	Health:
+		HP: 19000
+	Mobile:
+		Speed: 22
+
+TRIC:
+	Inherits: ^DINO
+	Tooltip:
+		Name: Triceratops
+	Armor:
+		Type: Light
+	Armament:
+		Weapon: DinoHorn
+	Buildable:
+		Description: Quadruped with large bony frill and three horns
+	Health:
+		HP: 18000
+	Mobile:
+		Speed: 18
+
+EG1:
+    Inherits: E1
+    -Buildable
+	Tooltip:
+		Name: En-gen mercenary
+	RenderSprites:
+		Image: E1
+
+EG2:
+    Inherits: SHOK
+    -Buildable
+	Tooltip:
+		Name: En-gen catcher
+	RenderSprites:
+		Image: SHOK
+
+EGJEEP:
+	Inherits: JEEP
+    -Buildable:
+	Tooltip:
+		Name: En-gen Jeep
+	RenderSprites:
+		Image: JEEP
+
+EGLAND:
+	Inherits: ^Ship
+	Tooltip:
+		Name: En-gen Landing Craft
+	Mobile:
+		Locomotor: lcraft
+		TurnSpeed: 1
+		Speed: 80
+		PauseOnCondition: notmobile
+	Health:
+		HP: 30000
+	Armor:
+		Type: Heavy
+	RevealsShroud:
+		Range: 7c0
+	WithFacingSpriteBody:
+	Cargo:
+		Types: Infantry, Vehicle
+		MaxWeight: 5
+		PassengerFacing: 0
+		LoadingCondition: notmobile
+

@@ -1,0 +1,16 @@
+Pike:
+	Inherits: ^AntiGroundMissile
+	ReloadDelay: 12
+	Range: 7c512
+	Projectile: Missile
+		Arm: 3
+		Inaccuracy: 0
+		Image: DRAGON
+		HorizontalRateOfTurn: 20
+		RangeLimit: 9c0
+		Speed: 300
+	Warhead@1Dam: SpreadDamage
+		Damage: 3000
+		Versus:
+			Light: 90
+

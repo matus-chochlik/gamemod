@@ -1,0 +1,39 @@
+slst:
+	idle:
+	open:
+		Start: 1
+		Length: 4
+		Tick: 150
+	close:
+		Frames: 4, 3, 2, 1
+		Length: 4
+		Tick: 150
+	unload:
+		Start: 4
+		ZOffset: -511
+	icon: lsticon
+
+ssm:
+	idle: sam2
+		Facings: 32
+		UseClassicFacingFudge: True
+		Offset: -1,-2
+	damaged-idle: sam2
+		Start: 34
+		Facings: 32
+		UseClassicFacingFudge: True
+		Offset: -1,-2
+	make: sammake
+		Length: *
+		Offset: -1,-2
+	muzzle: samfire
+		Length: 18
+		Facings: 8
+		Offset: -1,6
+	bib: mbSAM
+		Length: *
+		Offset: 0,1
+		UseTilesetExtension: true
+	icon: samicon
+
+

@@ -1,0 +1,39 @@
+^DinoWeapon:
+	ReloadDelay: 30
+	Range: 1c0
+	Report: dinoatk1.aud
+	Projectile: Bullet
+        Speed: 2c0
+	Warhead@1Dam: SpreadDamage
+		Spread: 213
+		Damage: 10000
+		Versus:
+			None: 100
+			Wood: 20
+			Light: 15
+			Heavy: 5
+		DamageTypes: Prone50Percent, TriggerProne, DefaultDeath
+
+DinoTail:
+	Inherits: ^DinoWeapon
+
+DinoHorn:
+	Inherits: ^DinoWeapon
+	ReloadDelay: 20
+	Warhead@1Dam: SpreadDamage
+		Damage: 12000
+
+DinoTeeth:
+	Inherits: ^DinoWeapon
+
+DinoClaw:
+	Inherits: ^DinoWeapon
+	ReloadDelay: 10
+	Warhead@1Dam: SpreadDamage
+		Damage: 6000
+		Versus:
+			None: 100
+			Wood: 5
+			Light: 2
+			Heavy: 1
+

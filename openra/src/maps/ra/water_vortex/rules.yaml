@@ -1,0 +1,118 @@
+SLST:
+	Inherits: ^Ship
+	RenderSprites:
+		Image: LST
+	Buildable:
+		Queue: Ship
+		BuildPaletteOrder: 60
+		Prerequisites: ~spen, stek, ~techlevel.high
+		Description: Submersible naval transport.\nCan carry infantry and tanks.\n  Unarmed
+	Valued:
+		Cost: 3000
+	Tooltip:
+		Name: Submersible transport
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Health:
+		HP: 30000
+	Armor:
+		Type: Heavy
+	Mobile:
+		Locomotor: lcraft
+		Speed: 150
+		PauseOnCondition: notmobile
+	RevealsShroud:
+		MinRange: 4c0
+		Range: 4c0
+		RevealGeneratedShroud: False
+	RevealsShroud@GAPGEN:
+		Range: 2c0
+	SelectionDecorations:
+	WithLandingCraftAnimation:
+		OpenTerrainTypes: Clear, Road, Beach
+	Cargo:
+		Types: Infantry, Vehicle
+		MaxWeight: 3
+		PipCount: 3
+		PassengerFacing: 0
+		LoadingCondition: notmobile
+	Selectable:
+		DecorationBounds: 36,36
+	Targetable:
+		TargetTypes: Ground, Water, Ship, Submarine, Repair
+		RequiresCondition: !underwater
+	Targetable@UNDERWATER:
+		TargetTypes: Underwater, Submarine
+		RequiresCondition: underwater
+	Cloak:
+		CloakTypes: Underwater
+		InitialDelay: 150
+		CloakDelay: 250
+		CloakSound: subshow1.aud
+		UncloakSound: subshow1.aud
+		CloakedCondition: underwater
+		Palette: submerged
+		PauseOnCondition: landed || cloak-force-disabled
+	GrantConditionOnTerrain@UNCLOAK:
+		Condition: landed
+		TerrainTypes: Clear, Rough, Road, Beach
+	GrantConditionOnDamageState@UNCLOAK:
+		Condition: cloak-force-disabled
+		ValidDamageStates: Critical
+	-Chronoshiftable:
+	-MustBeDestroyed:
+
+SSM:
+	Inherits: ^Defense
+	Inherits@IDISABLE: ^DisableOnLowPowerOrPowerDown
+	Inherits@AUTOTARGET: ^AutoTargetGround
+	Inherits@shape: ^2x1Shape
+	Selectable:
+		Bounds: 48,24
+	HitShape:
+		Type: Rectangle
+			TopLeft: -768,-512
+			BottomRight: 768,512
+	Buildable:
+		Queue: Defense
+		BuildPaletteOrder: 120
+		Prerequisites: dome, ~structures.soviet, ~techlevel.medium
+		Description: Anti-Surface base defense.\nRequires power to operate.\n  Strong vs Ground units\n
+	Valued:
+		Cost: 800
+	Tooltip:
+		Name: SSM Site
+	Building:
+		Footprint: xx
+		Dimensions: 2,1
+	Health:
+		HP: 40000
+	Armor:
+		Type: Heavy
+	RevealsShroud:
+		MinRange: 5c0
+		Range: 8c0
+		RevealGeneratedShroud: False
+	RevealsShroud@GAPGEN:
+		Range: 5c0
+	WithBuildingBib:
+		HasMinibib: true
+	Turreted:
+		TurnSpeed: 30
+		InitialFacing: 0
+	-WithSpriteBody:
+	WithEmbeddedTurretSpriteBody:
+	Armament:
+		Weapon: Pike
+		LocalOffset: 0,0,320
+		MuzzleSequence: muzzle
+	AttackTurreted:
+		RequiresCondition: !build-incomplete
+		PauseOnCondition: disabled
+	WithMuzzleOverlay:
+	RenderRangeCircle:
+		RangeCircleType: aa
+	Power:
+		Amount: -40
+	BodyOrientation:
+		UseClassicFacingFudge: True

@@ -1,0 +1,149 @@
+World:
+	SpawnMPUnits:
+	MPStartLocations:
+	LuaScript:
+		Scripts: roger.lua
+
+PIR:
+    Inherits: E7
+    -Buildable:
+	Tooltip:
+		Name: Pirate
+	Health:
+		HP: 5000
+	ExternalCondition@FRENZY:
+		Condition: frenzy
+	DamageMultiplier@FRENZY:
+		RequiresCondition: frenzy
+		Modifier: 50
+    -Voiced:
+	RenderSprites:
+		Image: E7
+
+PYR:
+    Inherits: E4
+    -Buildable:
+	Tooltip:
+		Name: Pyrate
+	Health:
+		HP: 5000
+	ExternalCondition@FRENZY:
+		Condition: frenzy
+	DamageMultiplier@FRENZY:
+		RequiresCondition: frenzy
+		Modifier: 75
+    -Voiced:
+	RenderSprites:
+		Image: E4
+
+PICP:
+	Inherits: ^Soldier
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Tooltip:
+		Name: Pirate captain
+	Health:
+		HP: 10000
+	ExternalCondition@FRENZY:
+		Condition: frenzy
+	DamageMultiplier@FRENZY:
+		RequiresCondition: frenzy
+		Modifier: 25
+	Mobile:
+		Speed: 75
+	RevealsShroud:
+		Range: 9c0
+	Demolition:
+		DetonationDelay: 65
+	Armament@PRIMARY:
+		Weapon: flintlock
+	Armament@SECONDARY:
+		Weapon: flintlock
+	Armament@GARRISONED:
+		Name: garrisoned
+		Weapon: flintlock
+		MuzzleSequence: garrison-muzzle
+	WithInfantryBody:
+		IdleSequences: idle
+		DefaultAttackSequence: idle
+		StandSequences: stand
+	RenderSprites:
+		Image: THF
+
+PIBARD:
+	Inherits: ^Soldier
+	Tooltip:
+		Name: Pirate bard
+	Health:
+		HP: 4000
+	ProximityExternalCondition:
+		Condition: frenzy
+		Range: 8c0
+	Mobile:
+		Speed: 75
+	WithInfantryBody:
+		IdleSequences: panic-stand
+	RevealsShroud:
+		Range: 8c0
+	RenderSprites:
+		Image: EINSTEIN
+
+
+PICAN:
+	Inherits: ^TrackedVehicle
+	Inherits@GAINSEXPERIENCE: ^GainsExperience
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Tooltip:
+		Name: Pirate field cannon
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Health:
+		HP: 15000
+	Armor:
+		Type: Heavy
+	Mobile:
+		TurnSpeed: 2
+		Speed: 55
+		Locomotor: lighttracked
+	RevealsShroud:
+		MinRange: 4c0
+		Range: 15c0
+		RevealGeneratedShroud: False
+	RevealsShroud@GAPGEN:
+		Range: 5c0
+	Armament:
+		Weapon: cabol
+		LocalOffset: 624,0,208
+		MuzzleSequence: muzzle
+	AttackFrontal:
+		TargetFrozenActors: True
+		ForceFireIgnoresActors: True
+	WithMuzzleOverlay:
+	Explodes:
+		Weapon: ArtilleryExplode
+		EmptyWeapon: UnitExplodeSmall
+		LoadedChance: 75
+	RenderSprites:
+		Image: ARTY
+
+BARGE:
+	Inherits: ^Ship
+	Tooltip:
+		Name: Pirate barge
+	Mobile:
+		Locomotor: lcraft
+		TurnSpeed: 2
+		Speed: 95
+		PauseOnCondition: notmobile
+	Health:
+		HP: 30000
+	Armor:
+		Type: Heavy
+	RevealsShroud:
+		Range: 7c0
+	WithFacingSpriteBody:
+	Cargo:
+		Types: Infantry, Vehicle
+		MaxWeight: 10
+		PassengerFacing: 0
+		LoadingCondition: notmobile
+
