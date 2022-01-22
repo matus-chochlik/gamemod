@@ -1,0 +1,41 @@
+#!/bin/bash
+pkg_name="juch-openra"
+this_dir="$(realpath $(dirname ${0}))"
+#work_dir="$(mktemp -d)"
+work_dir=/tmp/ora/deb
+mkdir -p "${work_dir}"
+
+function deb_gen_cleanup {
+	#rm -r "${work_dir}"
+	return 0
+}
+trap deb_gen_cleanup EXIT
+
+pkg_dir="${work_dir}/${pkg_name}"
+function get_pkg_size {
+	du -k -s ${pkg_dir} | cut -f1
+}
+
+for mod in cnc ra
+do
+	mkdir -p "${pkg_dir}/opt/juch/openra/maps/${mod}" || exit $?
+	find ./maps/${mod}/ -type f -name '*.oramap' |\
+	xargs -I '{}' cp '{}' "${pkg_dir}/opt/juch/openra/maps/${mod}/"
+done
+
+mkdir -p "${pkg_dir}/opt/juch/openra/bin" || exit $?
+cp "${this_dir}/bin/update-my-maps" "${pkg_dir}/opt/juch/openra/bin" || exit $?
+
+mkdir -p "${pkg_dir}/DEBIAN" || exit $?
+
+cat << EOD > "${pkg_dir}/DEBIAN/control"
+Package: ${pkg_name}
+Version: $(<${this_dir}/VERSION)
+Architecture: all
+Installed-Size: $(get_pkg_size)
+Depends:
+Maintainer: Matus Chochlik <chochlik@gmail.com>
+Description: OpenRA maps and mods
+EOD
+
+dpkg-deb --build --root-owner-group "${pkg_dir}"

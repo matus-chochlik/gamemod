@@ -1,0 +1,11 @@
+#!/bin/bash
+for mod in cnc ra
+do
+	src="/opt/juch/openra/maps/${mod}"
+	dst="${HOME}/snap/openra/current/.config/openra/maps/${mod}"
+	if [[ -d "${dst}" ]]
+	then
+		find "${src}" -type f -name '*.oramap' |\
+		xargs -I '{}' cp '{}' "${HOME}/snap/openra/current/.config/openra/maps/${mod}/release-"*
+	fi
+done
