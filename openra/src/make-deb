@@ -1,13 +1,11 @@
 #!/bin/bash
 pkg_name="juch-openra"
 this_dir="$(realpath $(dirname ${0}))"
-#work_dir="$(mktemp -d)"
-work_dir=/tmp/ora/deb
+work_dir="$(mktemp -d)"
 mkdir -p "${work_dir}"
 
 function deb_gen_cleanup {
-	#rm -r "${work_dir}"
-	return 0
+	rm -r "${work_dir}"
 }
 trap deb_gen_cleanup EXIT
 
@@ -25,6 +23,7 @@ done
 
 mkdir -p "${pkg_dir}/opt/juch/openra/bin" || exit $?
 cp "${this_dir}/bin/update-my-maps" "${pkg_dir}/opt/juch/openra/bin" || exit $?
+chmod a+x "${pkg_dir}/opt/juch/openra/bin/update-my-maps" || exit $?
 
 mkdir -p "${pkg_dir}/DEBIAN" || exit $?
 
@@ -38,4 +37,5 @@ Maintainer: Matus Chochlik <chochlik@gmail.com>
 Description: OpenRA maps and mods
 EOD
 
-dpkg-deb --build --root-owner-group "${pkg_dir}"
+dpkg-deb --build --root-owner-group "${pkg_dir}" &&\
+mv "${pkg_dir}.deb" .
