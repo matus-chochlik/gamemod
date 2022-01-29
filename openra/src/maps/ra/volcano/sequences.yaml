@@ -1,0 +1,28 @@
+dome:
+    idle: miss
+	damaged-idle:
+		Start: 1
+	dead: miss
+		Start: 2
+		Tick: 800
+	make: missmake
+		Length: *
+	bib: bib2
+		Length: *
+		UseTilesetExtension: true
+
+npwr:
+	idle: dome
+		Offset: 0,-4
+	damaged-idle: dome
+		Start: 1
+		Offset: 0,-4
+	make: domemake
+		Length: *
+		Offset: 0,-4
+	bib: bib3
+		Length: *
+		UseTilesetExtension: true
+	icon: domeicon
+	fake-icon: domficon
+        

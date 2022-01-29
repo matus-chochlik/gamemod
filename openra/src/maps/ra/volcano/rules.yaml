@@ -1,0 +1,103 @@
+DOME:
+	Inherits@shape: ^3x2Shape
+	HitShape:
+		UseTargetableCellsOffsets: false
+		TargetableOffsets: 0,0,0, 840,0,0, 840,-1024,0, 420,768,0, -840,0,0, -840,-1024,0, -840,1024,0
+	Selectable:
+		Priority: 0
+		Bounds: 72,48
+	Building:
+		Footprint: xxx xxx ===
+		Dimensions: 3,3
+		LocalCenterOffset: 0,-512,0
+	Tooltip:
+		Name: Radar center
+	RevealsShroud:
+		MinRange: 8c0
+		Range: 14c0
+		RequiresCondition: !disabled
+		RevealGeneratedShroud: False
+	RevealsShroud@Offline:
+		Range: 5c0
+		RequiresCondition: disabled
+	RevealsShroud@GAPGEN:
+		Range: 8c0
+		RequiresCondition: !disabled
+
+NPWR:
+	Inherits: ^Building
+	Inherits@POWER_OUTAGE: ^DisabledByPowerOutage
+	Inherits@shape: ^2x2Shape
+	HitShape:
+		UseTargetableCellsOffsets: false
+		TargetableOffsets: 0,0,0, 630,-384,0, 630,384,0, -700,-512,0, -700,512,0
+	Buildable:
+		Queue: Building
+		BuildPaletteOrder: 120
+		Prerequisites: weap, dome, techcenter
+		Description: Provides much more power than\na standard Power Plant.
+	Valued:
+		Cost: 5000
+	Tooltip:
+		Name: Nuclear Reactor
+    ProvidesPrerequisite@buildingname:
+	ProvidesPrerequisite:
+		Prerequisite: anypower
+	Building:
+		Footprint: xx xx ==
+		Dimensions: 2,3
+		LocalCenterOffset: 0,-512,0
+	Selectable:
+		Bounds: 72,48
+		DecorationBounds: 72,68,0,-10
+	Health:
+		HP: 150000
+	Armor:
+		Type: Concrete
+	Explodes:
+		Weapon: MiniNuke
+		EmptyWeapon: MiniNuke
+		DamageSource: Killer
+	RevealsShroud:
+		Range: 5c0
+	WithBuildingBib:
+	Power:
+		Amount: 4000
+	Targetable:
+		TargetTypes: GroundActor, Structure, DemoTruck, DetonateAttack
+	ScalePowerWithHealth:
+
+MSLO:
+	Buildable:
+		Prerequisites: npwr, techcenter, ~techlevel.unrestricted
+
+LHUS:
+	Health:
+		HP: 80000
+	Armor:
+		Type: Concrete
+	TooltipDescription@ally:
+		Description: Provides long range of vision.
+		ValidRelationships: Ally
+	TooltipDescription@other:
+		Description: Capture to give long visual range.
+		ValidRelationships: Neutral, Enemy
+	RevealsShroud:
+		MinRange: 10c0
+		Range: 25c0
+		RevealGeneratedShroud: False
+	RevealsShroud@GAPGEN:
+		Range: 10c0
+	CaptureManager:
+	Capturable:
+		Types: building
+	CapturableProgressBar:
+	CapturableProgressBlink:
+	EngineerRepairable:
+
+JEEP:
+	Mobile:
+		TurnSpeed: 50
+		Speed: 200
+		PauseOnCondition: notmobile || being-captured
+
