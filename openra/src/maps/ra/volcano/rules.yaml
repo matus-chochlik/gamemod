@@ -1,3 +1,21 @@
+Player:
+	BaseBuilderBotModule@rush:
+		PowerTypes: powr,apwr,npwr
+		BuildingFractions:
+			npwr: 1
+	BaseBuilderBotModule@normal:
+		PowerTypes: powr,apwr,npwr
+		BuildingFractions:
+			npwr: 1
+	BaseBuilderBotModule@turtle:
+		PowerTypes: powr,apwr,npwr
+		BuildingFractions:
+			npwr: 1
+	BaseBuilderBotModule@naval:
+		PowerTypes: powr,apwr,npwr
+		BuildingFractions:
+			npwr: 1
+
 DOME:
 	Inherits@shape: ^3x2Shape
 	HitShape:
