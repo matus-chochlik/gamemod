@@ -197,13 +197,17 @@ class PalFile(ShpPalette):
 # ------------------------------------------------------------------------------
 class ShpFrame:
     # --------------------------------------------------------------------------
-    def __init__(self, parent, shp):
+    def __init__(self, parent, shp, prev):
         self._parent = parent
-        ofs, rel = struct.unpack('II', shp.read(8))
+        ofs, self._ref = struct.unpack('II', shp.read(8))
         self._fmt = ofs >> 24
-        self._ofs = ofs & 0xFFFFFF
-        assert rel == 0 or rel >> 24 == 0x48
-        self._rel = rel & 0xFFFFFF
+        self._ofs = ofs & 0xffffff
+        if self._fmt == 0x20:
+            self._ref = prev
+
+    # --------------------------------------------------------------------------
+    def selfref(self):
+        return (self._fmt << 24) | (self._ofs)
 
     # --------------------------------------------------------------------------
     def offset(self):
@@ -225,39 +229,104 @@ class ShpFrame:
         return self._parent.data(self._ofs + ofs, size)
 
     # --------------------------------------------------------------------------
+    def find_referenced(self):
+        return self._parent.find_frame(self._ref & 0xffffff)
+
+    # --------------------------------------------------------------------------
+    def _decodeXor(self, result):
+        spos = 0
+        dpos = 0
+        def get(size):
+            nonlocal spos
+            frag = self.data(spos, size)
+            spos += size
+            return frag
+
+        def getb():
+            return struct.unpack('B', get(1))[0]
+
+        def xorv(v):
+            nonlocal dpos
+            result[dpos] ^= v
+            dpos += 1
+
+        while True:
+            cmd = getb()
+            if cmd == 0x80:
+                nxt = struct.unpack('H', get(2))[0]
+                if nxt == 0x0:
+                    break
+                elif nxt & 0xc000 == 0xc000:
+                    count = nxt & 0x3fff
+                    value = getb()
+                    for i in range(count):
+                        xorv(value)
+                elif nxt & 0xc000 == 0x8000:
+                    count = nxt & 0x3fff
+                    for i in range(count):
+                        xorv(getb())
+                elif nxt & 0x8000 == 0x0:
+                    count = nxt & 0x3fff
+                    dpos += 1
+            elif cmd == 0x00:
+                count, value = struct.unpack('BB', get(2))
+                for i in range(count):
+                    xorv(value)
+            elif cmd & 0x80 == 0x80:
+                count = cmd & 0x7f
+                dpos += count
+            elif cmd & 0x80 == 0x00:
+                count = cmd & 0x7f
+                for i in range(count):
+                    xorv(getb())
+            else:
+                raise Exception("invalid SHP decode command 0x%02x" % cmd)
+
+        return result
+
+    # --------------------------------------------------------------------------
+    def _decode20(self):
+        return self._decodeXor(self.find_referenced().decode())
+
+    # --------------------------------------------------------------------------
+    def _decode40(self):
+        return self._decodeXor(self.find_referenced().decode())
+
+    # --------------------------------------------------------------------------
     def _decode80(self):
         result = bytearray()
         pos = 0
+
+        def get(size):
+            nonlocal pos
+            frag = self.data(pos, size)
+            pos += size
+            return frag
+
         while True:
-            cmd = struct.unpack('B', self.data(pos, 1))[0]
-            pos += 1
+            cmd = struct.unpack('B', get(1))[0]
             if cmd == 0x80:
                 break
             elif cmd == 0xfe:
-                count, color = struct.unpack('HB', self.data(pos, 3))
-                pos += 3
+                count, color = struct.unpack('HB', get(3))
                 for i in range(count):
                     result.append(color)
             elif cmd == 0xff:
-                count, srcpos = struct.unpack('HH', self.data(pos, 4))
-                pos += 4
+                count, srcpos = struct.unpack('HH', get(4))
                 color = result[srcpos]
                 for i in range(count):
                     result.append(color)
             elif cmd & 0xC0 == 0x80:
                 count = cmd & 0x3F
-                result += self.data(pos, count)
-                pos += count
+                result += get(count)
             elif cmd & 0xC0 == 0xC0:
                 count = (cmd & 0x3F) + 3
-                dstpos = struct.unpack('H', self.data(pos, 2))[0]
-                pos += 2
+                dstpos = struct.unpack('H', get(2))[0]
                 for i in range(count):
                     result.append(result[dstpos + i])
             elif cmd & 0x80 == 0x00:
                 count = ((cmd & 0xF0) >> 4) + 3
-                dstpos = struct.unpack('B', self.data(pos, 1))[0]
-                pos += 1
+                dstpos = struct.unpack('B', get(1))[0]
                 dstpos = ((cmd & 0x0F) << 8) + dstpos
                 dstpos = len(result) - dstpos
                 for i in range(count):
@@ -271,6 +340,12 @@ class ShpFrame:
     def decode(self):
         if self._fmt == 0x80:
             return self._decode80()
+        elif self._fmt == 0x40:
+            return self._decode40()
+        elif self._fmt == 0x20:
+            return self._decode20()
+        else:
+            raise Exception("invalid SHP frame format 0x%02x" % self._fmt)
 
     # --------------------------------------------------------------------------
     def apply_palette(self, pal):
@@ -314,10 +389,15 @@ class ShpData:
         self._c = struct.unpack('I', shp.read(4))
 
         self._frames = []
+        self._framemap = {}
 
         self._data_start = 2 + 4 + 4 + 4
+        prevref = 0
         for i in range(self._nf):
-            self._frames.append(ShpFrame(self, shp))
+            newf = ShpFrame(self, shp, prevref)
+            self._framemap[newf.offset()] = len(self._frames)
+            self._frames.append(newf)
+            prevref = newf.selfref()
             self._data_start += 8
 
         self._data = shp.read()
@@ -329,6 +409,10 @@ class ShpData:
     # --------------------------------------------------------------------------
     def frame(self, idx):
         return self._frames[idx]
+
+    # --------------------------------------------------------------------------
+    def find_frame(self, ref):
+        return self._frames[self._framemap[ref & 0xFFFFFF]]
 
     # --------------------------------------------------------------------------
     def width(self):
