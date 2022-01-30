@@ -13,7 +13,7 @@ import argparse
 import functools
 # ------------------------------------------------------------------------------
 def temperat_pal():
-    return base64.b64decode(\
+    return io.BytesIO(base64.b64decode(\
 "AAAAKgAqACoqACoAFj8VPz8VPxUVKhUAKgAAFT8/FBQ/AAAqAAAAFRUVKioqPz8/BAMDAwQFBQUG"
 "CAcHBwgJCQkKDAoKCgwLCw0NEQ4OChEKDRAKCxAODhEODhQPEREPGRQODg4RDREbFRISEhUSFRYS"
 "GRYVFRkTEhkVGRkTHRkTGRoWHRoWHR0XFh0YFh0dGh4ZHh0dIhYUIhwWIh4bGyEXHSEZHiUdISIa"
@@ -27,13 +27,55 @@ def temperat_pal():
 "Aw0NAAgILTY/Hy88ESU5Ch42CRUzBhEtBQ8nBAwiNCYfMCIaLRwVKxcRJhMOIRAMHAsJGAkHPzkl"
 "PzUfPTEcOysVOigQOSQKNR4EMRgALRIAKQ4AJgoAIQgAGwQAFwIAEwAADgAAFzApFSwmEygiMTEx"
 "NjU2PxcAPwAAOwAANgAAMwAALwAALAAAJQAAIQAAHQAAGQAABwYCCQgDCgkEDAwFDg4HEBAIEhIK"
-"FBQMFhYOFxgQGRoSGxwVHR4XHyAaISIdPz8/")
+"FBQMFhYOFxgQGRoSGxwVHR4XHyAaISIdPz8/"))
+
+# ------------------------------------------------------------------------------
+def snow_pal():
+    return io.BytesIO(base64.b64decode(\
+"AAAAKgAqACoqACoAFT8VPz8VPxUVKhUAKgAAFT8/FBQ/AAAqAAAAFRUVKioqPz8/PzUjPzMlPTMj"
+"PzMiPzMfPS8dPS8YOysWOysSOSUMNR4EMRgALRIAKQ4AJgoAIgYAFzE3FykyFyMtFx0pFyMtFyky"
+"Fy03Pz8/Pz8/FSwJHAYAHAIAGAQAFgQAGAIABAAABAMDAwQDBAMFAwQFBQUGCAcHBggHCAgHBgcI"
+"BwgJCQkKDAoKCgwLDQwLCgoMCw0NDQ4NEQ4OChEKDRAKCxAODhEODhQPEREPGRQODg4RDhERDREb"
+"ERIRFRISEhUSFRYSGRYVFRkTEhkVFhkVGRkTHRkTGRoWHRoWGR0WHR0XFh0YFh0dGh4ZHh0dIhYU"
+"IhwWIh4bGyEXHSEZHiUdISIaJSIaJSUaISIdJSYdKiUdJCkdKioeFx4pIh4qFiEkHiMiAQECBQUH"
+"CQsNDhITERYYFRsdGSAiHSUnDggFFgsHHgwJJgwJKw0HMQoFNwUCPQAAIyISKCgXLS4eMjQlLCkh"
+"JCAdHRkZABwcARcZAhMXBA8UBQ0SChEJDBULDxkOEh4RHBgMJB4QLSQUNioZPycPPzQSGhMOIBcS"
+"KR4WCAgNEBAQKCQfLzEJKywIMzQJDyYOCxkHNj8/KDM0NDErNjQwNDwAKDgHIzICMjIyEhISLC05"
+"Jh8CIhsCHBUCEgkGIAQAPTUeNy8aMSoXLCUUIhwOGBMJDgsFBAMBMCsYKiYVJCITHx0QGxkOFhUL"
+"EhEJDg0HMjI1Ly8vKCgoISEhGxsbFBQUDQ0NBgYGNTU3MDA0KSkvISEnGRkfEhIXCwsPBQUHPzEe"
+"KhwTJCsxFxciFhEZIhQYHA4SJSMVHx0PPyUlOiAgBhwlABUeDiYkBR8dABgWHiIrGiUxIiIhJSUh"
+"KSUjKysjIiItJSItJiUuKSUqKSYuMS0jKSYwLCsyLS0yNzQ3BwYCCQgDCgkEDAwFDg4HEBAIEhIK"
+"FBQMFhYOFxgQGRoSGxwVHR4XHyAaISIdPz8/"))
 
 # ------------------------------------------------------------------------------
 class ShpArgParser(argparse.ArgumentParser):
     # --------------------------------------------------------------------------
     def __init__(self, **kw):
         argparse.ArgumentParser.__init__(self, **kw)
+
+        self.add_argument(
+            '-A', '--action',
+            metavar="ACTION",
+            dest="actions",
+            default=list(),
+            action='append',
+            nargs='?',
+            choices=[
+                "show"
+            ])
+
+        self.add_argument(
+            '-S', '--show',
+            default=False,
+            action='store_true')
+
+        self.add_argument(
+            '-F', '--frame',
+            metavar="NUMBER",
+            dest="frames",
+            default=list(),
+            action='append',
+            nargs='+')
 
         self.add_argument(
             '-s', '--shp',
@@ -62,18 +104,43 @@ class ShpArgParser(argparse.ArgumentParser):
         self.add_argument(
             '-E', '--embedded-palette',
             metavar="PAL-NAME",
-            dest="pal_path",
+            dest="pal_name",
             nargs='?',
             default=None,
-            choices=["temperat"])
+            choices=[
+                "temperat",
+                "snow"
+            ])
+
+    # --------------------------------------------------------------------------
+    def flatten(self, x):
+        if type(x) is list:
+            result = list()
+            for e in x:
+                for f in self.flatten(e):
+                    result += f
+            return result
+        return [x]
 
     # --------------------------------------------------------------------------
     def process_options(self, opts):
+        opts.frames = self.flatten(opts.frames)
+
+        try:
+            opts.frames = [int(f) for f in opts.frames]
+        except:
+            raise
+
         if opts.pal_path:
             opts.palette = PalFile(opts.pal_path)
         elif opts.pal_name:
             if opts.pal_name == "temperat":
-                opts.palette = temperat_pal()
+                opts.palette = ShpPalette(temperat_pal())
+            elif opts.pal_name == "snow":
+                opts.palette = ShpPalette(snow_pal())
+
+        if not hasattr(opts, 'palette'):
+            opts.palette = ShpPalette(temperat_pal())
         return opts
 
     # --------------------------------------------------------------------------
@@ -272,9 +339,11 @@ class ShpFile(ShpData):
 
 # ------------------------------------------------------------------------------
 def apply(opts):
-    shp = ShpFile(opts.shp_path, opts.palette)
-    shp.frame(0).show()
-    # print(ShpFile(opts.shp_path, opts.palette).info())
+    for action in opts.actions:
+        if action == "show":
+            shp = ShpFile(opts.shp_path, opts.palette)
+            for f in opts.frames:
+                shp.frame(f).show()
 
 # ------------------------------------------------------------------------------
 def main():
