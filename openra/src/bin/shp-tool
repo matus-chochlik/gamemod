@@ -61,6 +61,7 @@ class ShpArgParser(argparse.ArgumentParser):
             action='append',
             nargs='?',
             choices=[
+                "shp2gif",
                 "show"
             ])
 
@@ -76,6 +77,14 @@ class ShpArgParser(argparse.ArgumentParser):
             default=list(),
             action='append',
             nargs='+')
+
+        self.add_argument(
+            '-g', '--gif',
+            metavar="GIF-FILE",
+            dest="gif_path",
+            nargs='?',
+            default=None,
+            type=os.path.realpath)
 
         self.add_argument(
             '-s', '--shp',
@@ -156,6 +165,8 @@ class ShpPalette:
     # --------------------------------------------------------------------------
     def __init__(self, pal):
         self._pal = []
+        self._rawpal = pal.read()
+        pal = io.BytesIO(self._rawpal)
         while True:
             triplet = pal.read(3)
             if not triplet:
@@ -170,6 +181,11 @@ class ShpPalette:
     # --------------------------------------------------------------------------
     def apply_to(self, b):
         return [self.color(i) for i in b]
+
+    # --------------------------------------------------------------------------
+    def get(self):
+        from PIL import ImagePalette
+        return ImagePalette.raw("RGB", self._rawpal)
 
 # ------------------------------------------------------------------------------
 class PalFile(ShpPalette):
@@ -247,7 +263,7 @@ class ShpFrame:
                 for i in range(count):
                     result.append(result[dstpos + i])
             else:
-                raise Exception("invalid SHP command 0x%02x" % cmd)
+                raise Exception("invalid SHP decode command 0x%02x" % cmd)
 
         return result
 
@@ -265,7 +281,19 @@ class ShpFrame:
         return self.apply_palette(self._parent._pal)
 
     # --------------------------------------------------------------------------
-    def show_palette(self, pal):
+    def get_in_palette(self, pal):
+        from PIL import Image
+        img = Image.new("P", self.size())
+        img.palette = pal.get()
+        img.putdata(self.decode())
+        return img
+
+    # --------------------------------------------------------------------------
+    def get(self):
+        return self.get_in_palette(self._parent._pal)
+
+    # --------------------------------------------------------------------------
+    def show_in_palette(self, pal):
         from PIL import Image
         img = Image.new("RGB", self.size())
         img.putdata(self.apply_palette(pal))
@@ -273,7 +301,7 @@ class ShpFrame:
 
     # --------------------------------------------------------------------------
     def show(self):
-        return self.show_palette(self._parent._pal)
+        return self.show_in_palette(self._parent._pal)
 
 # ------------------------------------------------------------------------------
 class ShpData:
@@ -344,6 +372,14 @@ def apply(opts):
             shp = ShpFile(opts.shp_path, opts.palette)
             for f in opts.frames:
                 shp.frame(f).show()
+        if action == "shp2gif":
+            shp = ShpFile(opts.shp_path, opts.palette)
+            frames = opts.frames if opts.frames else range(shp.frame_count())
+            images = [shp.frame(i).get() for i in frames]
+            images[0].save(opts.gif_path,
+               save_all = True,
+               append_images = images[1:], 
+               optimize = False)
 
 # ------------------------------------------------------------------------------
 def main():
