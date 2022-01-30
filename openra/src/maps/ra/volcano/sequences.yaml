@@ -1,3 +1,6 @@
+miss:
+    icon: domeicon
+
 dome:
     idle: miss
 	damaged-idle:

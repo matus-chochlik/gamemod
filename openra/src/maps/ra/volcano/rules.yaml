@@ -41,6 +41,8 @@ DOME:
 	RevealsShroud@GAPGEN:
 		Range: 8c0
 		RequiresCondition: !disabled
+	RenderSprites:
+		Image: miss
 
 NPWR:
 	Inherits: ^Building
