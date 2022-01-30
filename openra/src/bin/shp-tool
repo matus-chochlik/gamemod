@@ -1,0 +1,287 @@
+#!/usr/bin/env python3
+# coding=utf-8
+# Copyright Matus Chochlik.
+# Distributed under the Boost Software License, Version 1.0.
+# See accompanying file LICENSE_1_0.txt or copy at
+#  http://www.boost.org/LICENSE_1_0.txt
+#
+import os
+import io
+import base64
+import struct
+import argparse
+import functools
+# ------------------------------------------------------------------------------
+def temperat_pal():
+    return base64.b64decode(\
+"AAAAKgAqACoqACoAFj8VPz8VPxUVKhUAKgAAFT8/FBQ/AAAqAAAAFRUVKioqPz8/BAMDAwQFBQUG"
+"CAcHBwgJCQkKDAoKCgwLCw0NEQ4OChEKDRAKCxAODhEODhQPEREPGRQODg4RDREbFRISEhUSFRYS"
+"GRYVFRkTEhkVGRkTHRkTGRoWHRoWHR0XFh0YFh0dGh4ZHh0dIhYUIhwWIh4bGyEXHSEZHiUdISIa"
+"JSIaJSYdKiUdJCkdKioeFx4pIh4qFiEkHiMiHiIrGiUxIiIhJSUhKSUjKysjIiItJiUuKSUqKSYu"
+"MS0jLCsyMi0yOTY5PTUeOTIcNS8aMSwYLSkWKiYVJCITJB0QIRwOGxkOFhULFRMJEhEIDg0HDQsF"
+"CggCFzE3FykyFyMtFx0pFyMtFykyFy03LwAANDAoMS0lLiohLCceKSQbJSAYIhsUHxgSOzg2NzMx"
+"My4sLikmKSQhJR8cIRwZHBYUFxIQFA8NDwsKCwcGAD8AADEAACMAABYAOzs7OTk5NDQ0Ly8vKysr"
+"KCgoJSUlIiIiHx8fHBwcGRkZFxcXExMTDg4OCQkJBQUFMTkhLDQfJy8dIisbHiYZGiIXFh0TExkP"
+"DxUMDBEJCQ0GBgkEPz8nPzUAPy0APyIAODk9MzQ6LS83KCoyIyUuHyErGh0oFholERUiDhIfDBAd"
+"Cg4bCAsYBgsVAwgRAgUNISkrHSUnGSAiFRsdERYYDhITCQwNBQgJESQfECEdDh0bBxsYBhYTBxAQ"
+"Aw0NAAgILTY/Hy88ESU5Ch42CRUzBhEtBQ8nBAwiNCYfMCIaLRwVKxcRJhMOIRAMHAsJGAkHPzkl"
+"PzUfPTEcOysVOigQOSQKNR4EMRgALRIAKQ4AJgoAIQgAGwQAFwIAEwAADgAAFzApFSwmEygiMTEx"
+"NjU2PxcAPwAAOwAANgAAMwAALwAALAAAJQAAIQAAHQAAGQAABwYCCQgDCgkEDAwFDg4HEBAIEhIK"
+"FBQMFhYOFxgQGRoSGxwVHR4XHyAaISIdPz8/")
+
+# ------------------------------------------------------------------------------
+class ShpArgParser(argparse.ArgumentParser):
+    # --------------------------------------------------------------------------
+    def __init__(self, **kw):
+        argparse.ArgumentParser.__init__(self, **kw)
+
+        self.add_argument(
+            '-s', '--shp',
+            metavar="SHP-FILE",
+            dest="shp_path",
+            nargs='?',
+            default=None,
+            type=os.path.realpath)
+
+        self.add_argument(
+            '-p', '--png',
+            metavar="PNG-FILE",
+            dest="png_path",
+            nargs='?',
+            default=None,
+            type=os.path.realpath)
+
+        self.add_argument(
+            '-P', '--palette',
+            metavar="PAL-FILE",
+            dest="pal_path",
+            nargs='?',
+            default=None,
+            type=os.path.realpath)
+
+        self.add_argument(
+            '-E', '--embedded-palette',
+            metavar="PAL-NAME",
+            dest="pal_path",
+            nargs='?',
+            default=None,
+            choices=["temperat"])
+
+    # --------------------------------------------------------------------------
+    def process_options(self, opts):
+        if opts.pal_path:
+            opts.palette = PalFile(opts.pal_path)
+        elif opts.pal_name:
+            if opts.pal_name == "temperat":
+                opts.palette = temperat_pal()
+        return opts
+
+    # --------------------------------------------------------------------------
+    def make_options(self):
+        return self.process_options(self.parse_args())
+
+# ------------------------------------------------------------------------------
+def make_argparser():
+    return ShpArgParser(prog=os.path.basename(__file__))
+
+# ------------------------------------------------------------------------------
+class ShpPalette:
+    # --------------------------------------------------------------------------
+    def __init__(self, pal):
+        self._pal = []
+        while True:
+            triplet = pal.read(3)
+            if not triplet:
+                break
+            r, g, b = struct.unpack_from('BBB', triplet)
+            self._pal.append((r, g, b));
+
+    # --------------------------------------------------------------------------
+    def color(self, i):
+        return self._pal[int(i)]
+
+    # --------------------------------------------------------------------------
+    def apply_to(self, b):
+        return [self.color(i) for i in b]
+
+# ------------------------------------------------------------------------------
+class PalFile(ShpPalette):
+    # --------------------------------------------------------------------------
+    def __init__(self, pal_path):
+        with open(pal_path, "rb") as pal:
+            ShpPalette.__init__(self, pal)
+
+# ------------------------------------------------------------------------------
+class ShpFrame:
+    # --------------------------------------------------------------------------
+    def __init__(self, parent, shp):
+        self._parent = parent
+        ofs, rel = struct.unpack('II', shp.read(8))
+        self._fmt = ofs >> 24
+        self._ofs = ofs & 0xFFFFFF
+        assert rel == 0 or rel >> 24 == 0x48
+        self._rel = rel & 0xFFFFFF
+
+    # --------------------------------------------------------------------------
+    def offset(self):
+        return self._ofs
+
+    # --------------------------------------------------------------------------
+    def info(self):
+        return {
+            "format": "0x%02x" % self._fmt,
+            "offset": self.offset()
+        }
+
+    # --------------------------------------------------------------------------
+    def size(self):
+        return self._parent.size()
+
+    # --------------------------------------------------------------------------
+    def data(self, ofs, size):
+        return self._parent.data(self._ofs + ofs, size)
+
+    # --------------------------------------------------------------------------
+    def _decode80(self):
+        result = bytearray()
+        pos = 0
+        while True:
+            cmd = struct.unpack('B', self.data(pos, 1))[0]
+            pos += 1
+            if cmd == 0x80:
+                break
+            elif cmd == 0xfe:
+                count, color = struct.unpack('HB', self.data(pos, 3))
+                pos += 3
+                for i in range(count):
+                    result.append(color)
+            elif cmd == 0xff:
+                count, srcpos = struct.unpack('HH', self.data(pos, 4))
+                pos += 4
+                color = result[srcpos]
+                for i in range(count):
+                    result.append(color)
+            elif cmd & 0xC0 == 0x80:
+                count = cmd & 0x3F
+                result += self.data(pos, count)
+                pos += count
+            elif cmd & 0xC0 == 0xC0:
+                count = (cmd & 0x3F) + 3
+                dstpos = struct.unpack('H', self.data(pos, 2))[0]
+                pos += 2
+                for i in range(count):
+                    result.append(result[dstpos + i])
+            elif cmd & 0x80 == 0x00:
+                count = ((cmd & 0xF0) >> 4) + 3
+                dstpos = struct.unpack('B', self.data(pos, 1))[0]
+                pos += 1
+                dstpos = ((cmd & 0x0F) << 8) + dstpos
+                dstpos = len(result) - dstpos
+                for i in range(count):
+                    result.append(result[dstpos + i])
+            else:
+                raise Exception("invalid SHP command 0x%02x" % cmd)
+
+        return result
+
+    # --------------------------------------------------------------------------
+    def decode(self):
+        if self._fmt == 0x80:
+            return self._decode80()
+
+    # --------------------------------------------------------------------------
+    def apply_palette(self, pal):
+        return pal.apply_to(self.decode())
+
+    # --------------------------------------------------------------------------
+    def apply(self):
+        return self.apply_palette(self._parent._pal)
+
+    # --------------------------------------------------------------------------
+    def show_palette(self, pal):
+        from PIL import Image
+        img = Image.new("RGB", self.size())
+        img.putdata(self.apply_palette(pal))
+        return img.show()
+
+    # --------------------------------------------------------------------------
+    def show(self):
+        return self.show_palette(self._parent._pal)
+
+# ------------------------------------------------------------------------------
+class ShpData:
+    # --------------------------------------------------------------------------
+    def __init__(self, shp, pal):
+        self._pal = pal
+        self._nf = struct.unpack('H', shp.read(2))[0]
+        self._a, self._b = struct.unpack('HH', shp.read(4))
+        self._w, self._h = struct.unpack('HH', shp.read(4))
+        self._c = struct.unpack('I', shp.read(4))
+
+        self._frames = []
+
+        self._data_start = 2 + 4 + 4 + 4
+        for i in range(self._nf):
+            self._frames.append(ShpFrame(self, shp))
+            self._data_start += 8
+
+        self._data = shp.read()
+
+    # --------------------------------------------------------------------------
+    def frame_count(self):
+        return self._nf
+
+    # --------------------------------------------------------------------------
+    def frame(self, idx):
+        return self._frames[idx]
+
+    # --------------------------------------------------------------------------
+    def width(self):
+        return self._w
+
+    # --------------------------------------------------------------------------
+    def height(self):
+        return self._h
+
+    # --------------------------------------------------------------------------
+    def size(self):
+        return (self.width(), self.height())
+
+    # --------------------------------------------------------------------------
+    def data(self, ofs, size):
+        ofs -= self._data_start
+        return self._data[ofs:ofs+size]
+
+    # --------------------------------------------------------------------------
+    def info(self):
+        return {
+            "frame_count": self.frame_count(),
+            "width": self.width(),
+            "height": self.height(),
+            "frames": {
+                i: self._frames[i].info() for i in range(len(self._frames))
+            }
+        }
+
+# ------------------------------------------------------------------------------
+class ShpFile(ShpData):
+    # --------------------------------------------------------------------------
+    def __init__(self, shp_path, pal):
+        with open(shp_path, "rb") as shp:
+            ShpData.__init__(self, shp, pal)
+
+# ------------------------------------------------------------------------------
+def apply(opts):
+    shp = ShpFile(opts.shp_path, opts.palette)
+    shp.frame(0).show()
+    # print(ShpFile(opts.shp_path, opts.palette).info())
+
+# ------------------------------------------------------------------------------
+def main():
+    apply(make_argparser().make_options())
+    return 0
+
+# ------------------------------------------------------------------------------
+if __name__ == "__main__": 
+    exit(main())
+
