@@ -467,7 +467,10 @@ def apply(opts):
 
 # ------------------------------------------------------------------------------
 def main():
-    apply(make_argparser().make_options())
+    try:
+        apply(make_argparser().make_options())
+    except KeyboardInterrupt:
+        return 1
     return 0
 
 # ------------------------------------------------------------------------------
