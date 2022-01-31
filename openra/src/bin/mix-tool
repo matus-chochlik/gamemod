@@ -22,6 +22,7 @@ class MixArgParser(argparse.ArgumentParser):
             action='append',
             nargs='?',
             choices=[
+                "extract",
                 "scan_names"
             ])
 
@@ -34,12 +35,20 @@ class MixArgParser(argparse.ArgumentParser):
 
         self.add_argument(
             '-E', '--extensions',
-            metavar="NUMBER",
+            metavar=".EXT",
             dest="extensions",
             default=list(),
             action='append',
             nargs='?',
             choices=[".SHP", ".PAL", ".TEM", ".BIN"])
+
+        self.add_argument(
+            '-e', '--entries',
+            metavar="NAME",
+            dest="entries",
+            default=list(),
+            action='append',
+            nargs='?')
 
         self.add_argument(
             '-i', '--input',
@@ -100,6 +109,12 @@ class MixEntry:
         return self._size
 
     # --------------------------------------------------------------------------
+    def save_file(self, name):
+        with open(name.lower(), "wb") as out:
+            ofs = self._start
+            out.write(self._parent._data[ofs:ofs+self._size])
+
+    # --------------------------------------------------------------------------
     def info(self):
         return {
             "id": self.id(),
@@ -117,6 +132,8 @@ class MixData:
         for i in range(self._filecount):
             newent = MixEntry(self, mix)
             self._entries.append(newent)
+
+        self._data = mix.read()
 
     # --------------------------------------------------------------------------
     def entry_count(self):
@@ -145,6 +162,13 @@ class MixData:
         chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
         for s in product(chars, repeat=length):
             yield "".join(s)
+
+    # --------------------------------------------------------------------------
+    def find_entries(self, names):
+        for name in names:
+            found = self.find_entry(name)
+            if found:
+                yield name, found
 
     # --------------------------------------------------------------------------
     def scan_for_names(self, maxlen, exts):
@@ -179,7 +203,11 @@ class MixFile(MixData):
 def apply(opts):
     mix = MixFile(opts.input_path)
     for action in opts.actions:
-        if action == "scan_names":
+        if action == "extract":
+            for n, e in mix.find_entries(opts.entries):
+                e.save_file(n)
+                print(n)
+        elif action == "scan_names":
             for n, e in mix.scan_for_names(opts.max_name_length, opts.extensions):
                 print(n)
 
