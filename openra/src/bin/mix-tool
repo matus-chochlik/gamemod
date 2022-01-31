@@ -1,0 +1,194 @@
+#!/usr/bin/env python3
+# coding=utf-8
+# Copyright Matus Chochlik.
+# Distributed under the Boost Software License, Version 1.0.
+# See accompanying file LICENSE_1_0.txt or copy at
+#  http://www.boost.org/LICENSE_1_0.txt
+#
+import os
+import struct
+import argparse
+# ------------------------------------------------------------------------------
+class MixArgParser(argparse.ArgumentParser):
+    # --------------------------------------------------------------------------
+    def __init__(self, **kw):
+        argparse.ArgumentParser.__init__(self, **kw)
+
+        self.add_argument(
+            '-A', '--action',
+            metavar="ACTION",
+            dest="actions",
+            default=list(),
+            action='append',
+            nargs='?',
+            choices=[
+                "scan_names"
+            ])
+
+        self.add_argument(
+            '-L', '--max-name-length',
+            metavar="NUMBER",
+            dest="max_name_length",
+            default=8,
+            type=int)
+
+        self.add_argument(
+            '-E', '--extensions',
+            metavar="NUMBER",
+            dest="extensions",
+            default=list(),
+            action='append',
+            nargs='?',
+            choices=[".SHP", ".PAL", ".TEM", ".BIN"])
+
+        self.add_argument(
+            '-i', '--input',
+            metavar="INPUT-FILE",
+            dest="input_path",
+            nargs='?',
+            type=os.path.realpath)
+
+
+    # --------------------------------------------------------------------------
+    def process_options(self, opts):
+        if not opts.extensions:
+            opts.extensions = [".SHP"]
+
+        return opts
+
+    # --------------------------------------------------------------------------
+    def make_options(self):
+        return self.process_options(self.parse_args())
+
+# ------------------------------------------------------------------------------
+def make_argparser():
+    return MixArgParser(prog=os.path.basename(__file__))
+
+# ------------------------------------------------------------------------------
+class MixEntry:
+    # --------------------------------------------------------------------------
+    def __init__(self, parent, mix):
+        self._parent = parent
+        self._id, self._start, self._size = struct.unpack('III', mix.read(12))
+
+    # --------------------------------------------------------------------------
+    @staticmethod
+    def compute_id(name):
+        buf = bytearray(name.upper().encode('ASCII'))
+        while len(buf) % 4 != 0:
+            buf.append(0x0)
+
+        def rotl(val, r_bits, max_bits):
+            return \
+                (val << r_bits % max_bits) & (2**max_bits - 1) | \
+                ((val & (2**max_bits - 1)) >> (max_bits - (r_bits%max_bits)))
+
+        rotl1 = lambda x: rotl(x, 1, 32)
+
+        result = 0
+        for chunk in [buf[i:i+4] for i in range(0, len(buf), 4)]:
+            result = rotl1(result)
+            result += (chunk[3] << 24) + (chunk[2] << 16) + (chunk[1] << 8) + chunk[0]
+        return result
+
+    # --------------------------------------------------------------------------
+    def id(self):
+        return self._id
+
+    # --------------------------------------------------------------------------
+    def size(self):
+        return self._size
+
+    # --------------------------------------------------------------------------
+    def info(self):
+        return {
+            "id": self.id(),
+            "size": self.size()
+        }
+
+# ------------------------------------------------------------------------------
+class MixData:
+    # --------------------------------------------------------------------------
+    def __init__(self, mix):
+        self._entries = []
+        self._filecount = struct.unpack('H', mix.read(2))[0]
+        self._datasize = struct.unpack('I', mix.read(4))[0]
+
+        for i in range(self._filecount):
+            newent = MixEntry(self, mix)
+            self._entries.append(newent)
+
+    # --------------------------------------------------------------------------
+    def entry_count(self):
+        return self._filecount
+
+    # --------------------------------------------------------------------------
+    def entry(self, idx):
+        return self._entries[idx]
+
+    # --------------------------------------------------------------------------
+    def find_entry(self, eid):
+        if type(eid) is int:
+            found = [e for e in self._entries if e.id() == eid]
+            return found[0] if found else None
+        elif type(eid) is str:
+            return self.find_entry(MixEntry.compute_id(eid))
+
+    # --------------------------------------------------------------------------
+    def data_size(self):
+        return self._datasize
+
+    # --------------------------------------------------------------------------
+    @staticmethod
+    def generate_names(length):
+        from itertools import product
+        chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+        for s in product(chars, repeat=length):
+            yield "".join(s)
+
+    # --------------------------------------------------------------------------
+    def scan_for_names(self, maxlen, exts):
+        if not isinstance(exts, list):
+            exts = [exts]
+        exts = [e if e.startswith(".") else "."+e for e in exts]
+
+        for l in range(1, maxlen + 1):
+            for name in MixData.generate_names(l):
+                for ext in exts:
+                    fullname = name+ext
+                    found = self.find_entry(fullname)
+                    if found:
+                        yield (fullname, found)
+
+    # --------------------------------------------------------------------------
+    def info(self):
+        return {
+            "data_size": self.data_size(),
+            "entry_count": self.entry_count(),
+            "entries": [e.info() for e in self._entries]
+        }
+
+# ------------------------------------------------------------------------------
+class MixFile(MixData):
+    # --------------------------------------------------------------------------
+    def __init__(self, mix_path):
+        with open(mix_path, "rb") as mix:
+            MixData.__init__(self, mix)
+
+# ------------------------------------------------------------------------------
+def apply(opts):
+    mix = MixFile(opts.input_path)
+    for action in opts.actions:
+        if action == "scan_names":
+            for n, e in mix.scan_for_names(opts.max_name_length, opts.extensions):
+                print(n)
+
+# ------------------------------------------------------------------------------
+def main():
+    apply(make_argparser().make_options())
+    return 0
+
+# ------------------------------------------------------------------------------
+if __name__ == "__main__": 
+    exit(main())
+
