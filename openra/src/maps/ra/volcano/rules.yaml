@@ -121,3 +121,8 @@ JEEP:
 		Speed: 200
 		PauseOnCondition: notmobile || being-captured
 
+MIG:
+	Aircraft:
+		TurnSpeed: 20
+		Speed: 260
+
