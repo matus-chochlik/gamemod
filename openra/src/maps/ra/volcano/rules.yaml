@@ -1,3 +1,22 @@
+World:
+	ResourceType@corium:
+		Type: Corium
+		Name: Radioactive contamination
+		ResourceType: 3
+		TerrainType: Gems
+		Palette: player
+		Sequences: gold01,gold02,gold03,gold04
+		MaxDensity: 4
+		ValuePerUnit: 75
+		AllowedTerrainTypes: Clear,Road
+		AllowUnderActors: true
+	ResourceRenderer:
+		RenderTypes: Ore, Gems, Corium
+	Locomotor@FOOT:
+		TerrainSpeeds:
+			Gems: 70
+				PathingCost: 400
+
 Player:
 	BaseBuilderBotModule@rush:
 		PowerTypes: powr,apwr,npwr
@@ -15,6 +34,16 @@ Player:
 		PowerTypes: powr,apwr,npwr
 		BuildingFractions:
 			npwr: 1
+
+^Infantry:
+	DamagedByTerrain:
+		Terrain: Gems
+		Damage: 200
+		DamageInterval: 16
+
+HARV:
+	Harvester:
+		Resources: Ore,Gems,Corium
 
 DOME:
 	Inherits@shape: ^3x2Shape
@@ -75,8 +104,7 @@ NPWR:
 	Armor:
 		Type: Concrete
 	Explodes:
-		Weapon: MiniNuke
-		EmptyWeapon: MiniNuke
+		Weapon: ReactorNuke
 		DamageSource: Killer
 	RevealsShroud:
 		Range: 5c0

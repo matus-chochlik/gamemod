@@ -6294,3 +6294,5 @@ Actors:
 Rules: rules.yaml
 
 Sequences: sequences.yaml
+
+Weapons: weapons.yaml
