@@ -1,4 +1,14 @@
 World:
+	Faction@outsiders:
+		Name: Outsiders
+		InternalName: outsiders
+		Side: Outsiders
+		Selectable: False
+	Faction@tramtaria:
+		Name: Tramtaria
+		InternalName: tramtaria
+		Side: Outsiders
+		Description: Outsiders: Light specialized units, very mobile
 	ResourceType@corium:
 		Type: Corium
 		Name: Radioactive contamination
@@ -45,6 +55,25 @@ HARV:
 	Harvester:
 		Resources: Ore,Gems,Corium
 
+HELI:
+	Armament@TERTIARY:
+		Weapon: DepthCharge
+		LocalOffset: 0,-100,0, 0,100,0
+		LocalYaw: 80, -80
+		PauseOnCondition: !ammo
+	DetectCloaked:
+		CloakTypes: Underwater
+		Range: 5c0
+	RenderDetectionCircle:
+
+MSUB:
+	Buildable:
+		Prerequisites: npwr, ~spen, stek, ~techlevel.high
+
+CA:
+	Buildable:
+		Prerequisites: npwr, ~syrd, atek, ~techlevel.high
+
 DOME:
 	Inherits@shape: ^3x2Shape
 	HitShape:
@@ -89,7 +118,7 @@ NPWR:
 		Cost: 5000
 	Tooltip:
 		Name: Nuclear Reactor
-    ProvidesPrerequisite@buildingname:
+	ProvidesPrerequisite@buildingname:
 	ProvidesPrerequisite:
 		Prerequisite: anypower
 	Building:
