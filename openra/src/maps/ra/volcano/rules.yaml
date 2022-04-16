@@ -191,16 +191,19 @@ TMPL:
 		DecorationBounds: 72,68,0,-12
 	Health:
 		HP: 500000
-	RevealsShroud:
-		Range: 6c0
 	RenderDetectionCircle:
 	DetectCloaked:
 		Range: 7c0
 	RenderSprites:
 		Palette: desert
 	WithBuildingBib:
+	RevealsShroud:
+		MinRange: 9c0
+		Range: 16c0
+	CreatesShroud:
+		Range: 9c0
 	Power:
-		Amount: 250
+		Amount: 500
 	ProvidesPrerequisite@buildingname:
 
 Spider:

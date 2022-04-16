@@ -1,5 +1,6 @@
 SpawnCreeps = function()
     local creeps = Player.GetPlayer("Creeps")
+    local neutral = Player.GetPlayer("Neutral")
 
     local spawninfo = {
         {Temple, CreepSpawnA, CreepDestA},
@@ -10,7 +11,8 @@ SpawnCreeps = function()
 	local what = "spider"
 
     local pop = creeps.GetActorsByType(what)
-    if #pop < 100 and not spawn[1].IsDead then
+    if #pop < 100 and not spawn[1].IsDead and spawn[1].EffectiveOwner == neutral
+	then
         Utils.Do(
             Reinforcements.Reinforce(
                 creeps,
