@@ -206,15 +206,76 @@ TMPL:
 		Amount: 500
 	ProvidesPrerequisite@buildingname:
 
+WZRD:
+	Inherits: ^Soldier
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Buildable:
+		Queue: Infantry
+		BuildAtProductionType: Soldier
+		BuildPaletteOrder: 900
+		Prerequisites: ~barracks, tmpl, ~techlevel.infonly
+		BuildLimit: 1
+		Description: Conjures dark magic,\nwreaks havoc.
+	Valued:
+		Cost: 2500
+	Tooltip:
+		Name: Dark sorcerer
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Health:
+		HP: 5000
+	RevealsShroud:
+		Range: 7c0
+	Armament@PRIMARY:
+		Weapon: PortaTesla
+		ReloadDelay: 140
+		ValidTargets: Ground, Water, GroundActor, WaterActor, AirborneActor
+		LocalOffset: 427,0,341
+		Range: 9c0
+	Armament@SECONDARY:
+		Weapon: FireballLauncher
+		Burst: 1
+		BurstDelay: 210
+		ValidTargets: Ground, GroundActor, Trees
+		Range: 8c0
+	Passenger:
+		CustomPipType: black
+	Voiced:
+		VoiceSet: ThiefVoice
+	WithInfantryBody:
+		IdleSequences: idle
+		StandSequences: stand
+	Explodes:
+		Weapon: VisualExplode
+		Chance: 70
+ 	Crushable:
+		WarnProbability: 95
+	Cloak:
+		InitialDelay: 250
+		CloakDelay: 120
+		UncloakOn: Attack, Move
+		CloakTypes: Cloak
+		IsPlayerPalette: true
+		PauseOnCondition: cloak-force-disabled
+	GrantConditionOnDamageState@UNCLOAK:
+		Condition: cloak-force-disabled
+		ValidDamageStates: Critical
+	Mobile:
+		Speed: 65
+	PortableChrono:
+		ChargeDelay: 80
+	RenderSprites:
+		Image: THF
+
 Spider:
 	Inherits: Ant
 	Tooltip:
 		Name: Dark spider
-    -Buildable:
+	-Buildable:
 	Health:
-		HP: 70000
+		HP: 50000
 	CreatesShroud:
-		Range: 4c0
+		Range: 3c0
 	RenderShroudCircle:
 	RenderSprites:
 		Image: Ant
