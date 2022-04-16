@@ -26,6 +26,8 @@ World:
 		TerrainSpeeds:
 			Gems: 70
 				PathingCost: 400
+	LuaScript:
+		Scripts: volcano.lua
 
 Player:
 	BaseBuilderBotModule@rush:
@@ -171,6 +173,48 @@ LHUS:
 	CapturableProgressBar:
 	CapturableProgressBlink:
 	EngineerRepairable:
+
+TMPL:
+	Inherits: ^Building
+	Inherits@shape: ^3x2Shape
+	HitShape:
+		UseTargetableCellsOffsets: false
+		TargetableOffsets: 0,0,0, 0,-896,0, 0,896,0, 840,0,0, -706,0,0, -706,-768,0, -706,640,0
+	Tooltip:
+		Name: Temple of black magic
+	Building:
+		Footprint: xxx xxx ===
+		Dimensions: 3,3
+		LocalCenterOffset: 0,-512,0
+	Selectable:
+		Bounds: 72,48
+		DecorationBounds: 72,68,0,-12
+	Health:
+		HP: 500000
+	RevealsShroud:
+		Range: 6c0
+	RenderDetectionCircle:
+	DetectCloaked:
+		Range: 7c0
+	RenderSprites:
+		Palette: desert
+	WithBuildingBib:
+	Power:
+		Amount: 250
+	ProvidesPrerequisite@buildingname:
+
+Spider:
+	Inherits: Ant
+	Tooltip:
+		Name: Dark spider
+    -Buildable:
+	Health:
+		HP: 70000
+	CreatesShroud:
+		Range: 4c0
+	RenderShroudCircle:
+	RenderSprites:
+		Image: Ant
 
 JEEP:
 	Mobile:

@@ -104,49 +104,70 @@ Players:
 		Enemies: Creeps
 
 Actors:
-	Actor68: mpspawn
+	Temple: tmpl
+		Owner: Neutral
+		Location: 187,181
+	CreepSpawnA: waypoint
+		Location: 188,179
+		Owner: Creeps
+	CreepSpawnB: waypoint
+		Owner: Neutral
+		Location: 191,183
+	CreepSpawnC: waypoint
+		Owner: Neutral
+		Location: 185,182
+	CreepDestA: waypoint
+		Location: 199,187
+		Owner: Creeps
+	CreepDestB: waypoint
+		Location: 183,193
+		Owner: Creeps
+	CreepDestC: waypoint
+		Location: 172,190
+		Owner: Creeps
+	SpawnA: mpspawn
 		Owner: Neutral
 		Location: 399,288
-	Actor69: mpspawn
+	SpawnB: mpspawn
 		Owner: Neutral
 		Location: 224,325
-	Actor70: mpspawn
+	SpawnC: mpspawn
 		Owner: Neutral
 		Location: 42,283
-	Actor71: mpspawn
+	SpawnD: mpspawn
 		Owner: Neutral
 		Location: 75,94
-	Actor72: mpspawn
+	SpawnE: mpspawn
 		Owner: Neutral
 		Location: 110,90
-	Actor73: mpspawn
+	SpawnF: mpspawn
 		Owner: Neutral
 		Location: 164,82
-	Actor74: mpspawn
+	SpawnG: mpspawn
 		Owner: Neutral
 		Location: 377,125
-	Actor75: mpspawn
+	SpawnH: mpspawn
 		Owner: Neutral
 		Location: 398,155
-	Actor76: mpspawn
+	SpawnI: mpspawn
 		Owner: Neutral
 		Location: 372,199
-	Actor77: mpspawn
+	SpawnJ: mpspawn
 		Owner: Neutral
 		Location: 393,219
-	Actor78: mpspawn
+	SpawnK: mpspawn
 		Owner: Neutral
 		Location: 112,270
-	Actor79: mpspawn
+	SpawnL: mpspawn
 		Owner: Neutral
 		Location: 278,144
-	Actor80: mpspawn
+	SpawnM: mpspawn
 		Owner: Neutral
 		Location: 276,249
-	Actor81: mpspawn
+	SpawnN: mpspawn
 		Owner: Neutral
 		Location: 232,166
-	Actor193: mpspawn
+	SpawnO: mpspawn
 		Owner: Neutral
 		Location: 456,208
 	Actor0: gmine
@@ -6290,6 +6311,171 @@ Actors:
 	Actor2064: t03
 		Owner: Neutral
 		Location: 327,83
+	Actor2065: tc01.husk
+		Owner: Neutral
+		Location: 185,180
+	Actor2066: tc04.husk
+		Owner: Neutral
+		Location: 189,179
+	Actor2067: t15.husk
+		Owner: Neutral
+		Location: 185,182
+	Actor2068: t17.husk
+		Owner: Neutral
+		Location: 187,183
+	Actor2069: t16.husk
+		Owner: Neutral
+		Location: 188,183
+	Actor2070: t12.husk
+		Owner: Neutral
+		Location: 190,181
+	Actor2071: t07.husk
+		Owner: Neutral
+		Location: 191,180
+	Actor2072: t03
+		Owner: Neutral
+		Location: 186,183
+	Actor2073: t10
+		Owner: Neutral
+		Location: 192,178
+	Actor2074: t12
+		Owner: Neutral
+		Location: 186,179
+	Actor2075: t11
+		Owner: Neutral
+		Location: 184,183
+	Actor2076: tc01
+		Owner: Neutral
+		Location: 182,182
+	Actor2077: tc04
+		Owner: Neutral
+		Location: 183,175
+	Actor2078: tc02
+		Owner: Neutral
+		Location: 186,176
+	Actor2079: tc02
+		Owner: Neutral
+		Location: 195,181
+	Actor2080: tc04
+		Owner: Neutral
+		Location: 185,184
+	Actor2081: tc03
+		Owner: Neutral
+		Location: 184,179
+	Actor2082: t16
+		Owner: Neutral
+		Location: 184,180
+	Actor2083: tc05
+		Owner: Neutral
+		Location: 195,175
+	Actor2084: tc01
+		Owner: Neutral
+		Location: 193,176
+	Actor2085: tc03
+		Owner: Neutral
+		Location: 197,177
+	Actor2086: tc04
+		Owner: Neutral
+		Location: 193,182
+	Actor2087: tc01
+		Owner: Neutral
+		Location: 192,184
+	Actor2088: t16
+		Owner: Neutral
+		Location: 194,184
+	Actor2089: t11
+		Owner: Neutral
+		Location: 191,175
+	Actor2090: t14
+		Owner: Neutral
+		Location: 186,174
+	Actor2091: tc03
+		Owner: Neutral
+		Location: 189,176
+	Actor2092: t12
+		Owner: Neutral
+		Location: 191,185
+	Actor2093: t13
+		Owner: Neutral
+		Location: 192,185
+	Actor2094: tc02
+		Owner: Neutral
+		Location: 190,186
+	Actor2095: tc01
+		Owner: Neutral
+		Location: 189,187
+	Actor2096: t16
+		Owner: Neutral
+		Location: 189,188
+	Actor2097: t14
+		Owner: Neutral
+		Location: 190,188
+	Actor2098: t11
+		Owner: Neutral
+		Location: 192,187
+	Actor2099: tc03
+		Owner: Neutral
+		Location: 184,187
+	Actor2100: tc05
+		Owner: Neutral
+		Location: 182,184
+	Actor2101: t16
+		Owner: Neutral
+		Location: 183,183
+	Actor2102: t02
+		Owner: Neutral
+		Location: 181,176
+	Actor2103: t01
+		Owner: Neutral
+		Location: 181,175
+	Actor2104: t14
+		Owner: Neutral
+		Location: 179,178
+	Actor2105: t17
+		Owner: Neutral
+		Location: 181,179
+	Actor2106: t12
+		Owner: Neutral
+		Location: 180,180
+	Actor2107: t10
+		Owner: Neutral
+		Location: 180,181
+	Actor2108: tc04
+		Owner: Neutral
+		Location: 179,182
+	Actor2109: t16
+		Owner: Neutral
+		Location: 181,184
+	Actor2110: t14
+		Owner: Neutral
+		Location: 179,184
+	Actor2111: t13
+		Owner: Neutral
+		Location: 181,185
+	Actor2112: t08
+		Owner: Neutral
+		Location: 199,178
+	Actor2113: t08
+		Owner: Neutral
+		Location: 195,180
+	Actor2114: t08
+		Owner: Neutral
+		Location: 183,179
+	Actor2115: t08
+		Owner: Neutral
+		Location: 188,176
+	Actor2116: tc01
+		Owner: Neutral
+		Location: 178,180
+	Actor2117: t16
+		Owner: Neutral
+		Location: 179,179
+	Actor2118: tc04
+		Owner: Neutral
+		Location: 176,181
+	Actor2119: tc03
+		Owner: Neutral
+		Location: 176,179
 
 Rules: rules.yaml
 
