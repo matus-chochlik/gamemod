@@ -16,7 +16,7 @@ SpawnCreeps = function()
         Utils.Do(
             Reinforcements.Reinforce(
                 creeps,
-                {what, what},
+                {what, what, what},
                 {spawn[1].Location, spawn[1].Location}
             ),
             function(z) Trigger.OnIdle(z, z.Hunt) end
