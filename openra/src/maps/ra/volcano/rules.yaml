@@ -57,6 +57,20 @@ HARV:
 	Harvester:
 		Resources: Ore,Gems,Corium
 
+APC:
+	Valued:
+		Cost: 1000
+	Cloak:
+		InitialDelay: 320
+		CloakDelay: 50
+		UncloakOn: Attack, Move, Heal
+		IsPlayerPalette: true
+		PauseOnCondition: cloak-force-disabled
+	GrantConditionOnDamageState@UNCLOAK:
+		Condition: cloak-force-disabled
+		ValidDamageStates: Critical
+	-MustBeDestroyed:
+
 HELI:
 	Armament@TERTIARY:
 		Weapon: DepthCharge
