@@ -1,14 +1,4 @@
 World:
-	Faction@outsiders:
-		Name: Outsiders
-		InternalName: outsiders
-		Side: Outsiders
-		Selectable: False
-	Faction@tramtaria:
-		Name: Tramtaria
-		InternalName: tramtaria
-		Side: Outsiders
-		Description: Outsiders: Light specialized units, very mobile
 	ResourceType@corium:
 		Type: Corium
 		Name: Radioactive contamination
@@ -61,15 +51,26 @@ APC:
 	Valued:
 		Cost: 1000
 	Cloak:
-		InitialDelay: 320
-		CloakDelay: 50
+		InitialDelay: 200
+		CloakDelay: 80
 		UncloakOn: Attack, Move, Heal
 		IsPlayerPalette: true
-		PauseOnCondition: cloak-force-disabled
+		PauseOnCondition: uncloak-when-damaged
 	GrantConditionOnDamageState@UNCLOAK:
-		Condition: cloak-force-disabled
+		Condition: uncloak-when-damaged
 		ValidDamageStates: Critical
 	-MustBeDestroyed:
+
+U2:
+	RevealsShroud:
+		Range: 4c0
+		Type: GroundPosition
+
+BADR:
+	RevealsShroud:
+		Range: 5c0
+		Type: GroundPosition
+		RevealGeneratedShroud: False
 
 HELI:
 	Armament@TERTIARY:
