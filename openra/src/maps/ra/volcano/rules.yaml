@@ -16,6 +16,22 @@ World:
 		TerrainSpeeds:
 			Gems: 70
 				PathingCost: 400
+	Locomotor@ATCRAFT:
+		Name: atcraft
+		Crushes: crate, mine
+		TerrainSpeeds:
+			Clear: 110
+			Water: 110
+			Beach: 90
+			Road: 120
+			Bridge: 100
+				PathingCost: 50
+			Ore: 60
+				PathingCost: 100
+			Gems: 50
+				PathingCost: 150
+			Rough: 40
+				PathingCost: 200
 	LuaScript:
 		Scripts: volcano.lua
 
@@ -35,7 +51,7 @@ Player:
 	BaseBuilderBotModule@naval:
 		PowerTypes: powr,apwr,npwr
 		BuildingFractions:
-			npwr: 1
+			npwr: 2
 
 ^Infantry:
 	DamagedByTerrain:
@@ -82,6 +98,82 @@ HELI:
 		CloakTypes: Underwater
 		Range: 5c0
 	RenderDetectionCircle:
+
+RIG:
+	Inherits: ^Vehicle
+	Inherits@selection: ^SelectableSupportUnit
+	Buildable:
+		Queue: Vehicle
+		BuildPaletteOrder: 450
+		Prerequisites: ~techlevel.high
+		Description: Allows to place buildings nearby.\n  Unarmed
+	Valued:
+		Cost: 1500
+	Tooltip:
+		Name: Rig
+	Health:
+		HP: 15000
+	Armor:
+		Type: Light
+	Mobile:
+		Speed: 108
+	RevealsShroud:
+		Range: 4c0
+	GivesBuildableArea:
+		AreaTypes: building
+	BaseProvider:
+        PauseOnCondition: too-damaged
+		Range: 3c0
+	GrantConditionOnDamageState@DISABLE:
+		Condition: too-damaged
+		ValidDamageStates: Medium, Heavy, Critical
+	RenderSprites:
+		Image: TRUK
+
+ATLST:
+	Inherits: ^Ship
+	Inherits@CARGOPIPS: ^CargoPips
+	Buildable:
+		Queue: Ship
+		BuildPaletteOrder: 60
+		Prerequisites: ~techlevel.high, techcenter, oilb
+		Description: All-terrain transport.\nCan carry infantry and tanks.\n  Unarmed
+	Valued:
+		Cost: 3500
+	Tooltip:
+		Name: All-terrain transport
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Health:
+		HP: 25000
+	Armor:
+		Type: Heavy
+	Mobile:
+		Locomotor: atcraft
+        Speed: 130
+		PauseOnCondition: notmobile
+	RevealsShroud:
+		MinRange: 4c0
+		Range: 4c0
+		RevealGeneratedShroud: False
+	RevealsShroud@GAPGEN:
+		Range: 3c0
+	WithLandingCraftAnimation:
+		OpenTerrainTypes: Clear, Road, Beach
+	Cargo:
+		Types: Infantry, Vehicle
+		MaxWeight: 3
+		PassengerFacing: 0
+		LoadingCondition: notmobile
+	-Chronoshiftable:
+	Selectable:
+		DecorationBounds: 36,36
+	DamagedByTerrain:
+		Terrain: Rough
+		Damage: 20
+		DamageInterval: 10
+	RenderSprites:
+		Image: LST
 
 MSUB:
 	Buildable:
@@ -188,6 +280,10 @@ LHUS:
 	CapturableProgressBar:
 	CapturableProgressBlink:
 	EngineerRepairable:
+	ProvidesPrerequisite@buildingname:
+
+OILB:
+	ProvidesPrerequisite@buildingname:
 
 TMPL:
 	Inherits: ^Building
