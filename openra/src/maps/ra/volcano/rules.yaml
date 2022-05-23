@@ -21,8 +21,8 @@ World:
 		Crushes: crate, mine
 		TerrainSpeeds:
 			Clear: 110
-			Water: 110
-			Beach: 90
+			Water: 105
+			Beach: 100
 			Road: 120
 			Bridge: 100
 				PathingCost: 50
@@ -51,7 +51,7 @@ Player:
 	BaseBuilderBotModule@naval:
 		PowerTypes: powr,apwr,npwr
 		BuildingFractions:
-			npwr: 2
+			npwr: 1
 
 ^Infantry:
 	DamagedByTerrain:
@@ -108,7 +108,7 @@ RIG:
 		Prerequisites: ~techlevel.high
 		Description: Allows to place buildings nearby.\n  Unarmed
 	Valued:
-		Cost: 1500
+		Cost: 2500
 	Tooltip:
 		Name: Rig
 	Health:
@@ -116,7 +116,7 @@ RIG:
 	Armor:
 		Type: Light
 	Mobile:
-		Speed: 108
+		Speed: 95
 	RevealsShroud:
 		Range: 4c0
 	GivesBuildableArea:
