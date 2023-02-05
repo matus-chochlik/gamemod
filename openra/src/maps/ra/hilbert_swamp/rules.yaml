@@ -1,0 +1,293 @@
+World:
+	Locomotor@WHEELED:
+		TerrainSpeeds:
+            Road: 150
+            Bridge: 120
+	Locomotor@HEAVYWHEELED:
+		TerrainSpeeds:
+            Road: 135
+            Bridge: 110
+	Locomotor@SPEEDBOAT:
+		Name: spdboat
+		Crushes: crate
+		TerrainSpeeds:
+			Water: 120
+			River: 20
+				PathingCost: 16000
+			Beach: 15
+				PathingCost: 32000
+	Locomotor@ATCRAFT:
+		Name: atcraft
+		Crushes: crate, mine
+		TerrainSpeeds:
+			Clear: 100
+			Water: 105
+			Beach: 80
+			Road: 120
+			Bridge: 90
+				PathingCost: 50
+			Ore: 60
+				PathingCost: 100
+			Gems: 50
+				PathingCost: 1500
+			River: 30
+				PathingCost: 1600
+			Rough: 30
+				PathingCost: 2000
+
+DOME:
+	Inherits@shape: ^3x2Shape
+	HitShape:
+		UseTargetableCellsOffsets: false
+		TargetableOffsets: 0,0,0, 840,0,0, 840,-1024,0, 420,768,0, -840,0,0, -840,-1024,0, -840,1024,0
+	Selectable:
+		Priority: 0
+		Bounds: 72,48
+	Building:
+		Footprint: xxx xxx ===
+		Dimensions: 3,3
+		LocalCenterOffset: 0,-512,0
+	Tooltip:
+		Name: Radar center
+	RevealsShroud:
+		MinRange: 8c0
+		Range: 14c0
+		RequiresCondition: !disabled
+		RevealGeneratedShroud: False
+	RevealsShroud@Offline:
+		Range: 5c0
+		RequiresCondition: disabled
+	RevealsShroud@GAPGEN:
+		Range: 8c0
+		RequiresCondition: !disabled
+	RenderSprites:
+		Image: miss
+
+MSLO:
+	Valued:
+		Cost: 7500
+
+LHUS:
+	Health:
+		HP: 80000
+	Armor:
+		Type: Concrete
+	TooltipDescription@ally:
+		Description: Provides long range of vision.
+		ValidRelationships: Ally
+	TooltipDescription@other:
+		Description: Capture to give long visual range.
+		ValidRelationships: Neutral, Enemy
+	RevealsShroud:
+		MinRange: 10c0
+		Range: 25c0
+		RevealGeneratedShroud: False
+	RevealsShroud@GAPGEN:
+		Range: 10c0
+	CaptureManager:
+	Capturable:
+		Types: building
+	CapturableProgressBar:
+	CapturableProgressBlink:
+	EngineerRepairable:
+	ProvidesPrerequisite@buildingname:
+
+SNIPER:
+	Buildable:
+		Prerequisites: ~tent, atek, ~techlevel.high
+	Valued:
+		Cost: 1200
+	RevealsShroud:
+		Range: 8c0
+	Cloak:
+		InitialDelay: 220
+		CloakDelay: 100
+		UncloakOn: Attack, Move
+		CloakTypes: Cloak
+		IsPlayerPalette: true
+		PauseOnCondition: cloak-force-disabled
+	GrantConditionOnDamageState@UNCLOAK:
+		Condition: cloak-force-disabled
+		ValidDamageStates: Critical
+
+MIG:
+	Aircraft:
+		TurnSpeed: 20
+		Speed: 260
+
+U2:
+	Aircraft:
+		TurnSpeed: 20
+		Speed: 300
+	RevealsShroud:
+		Range: 5c0
+		Type: GroundPosition
+
+BADR:
+	RevealsShroud:
+		Range: 6c0
+		Type: GroundPosition
+		RevealGeneratedShroud: False
+
+HELI:
+	Armament@TERTIARY:
+		Weapon: DepthCharge
+		LocalOffset: 0,-100,0, 0,100,0
+		LocalYaw: 80, -80
+		PauseOnCondition: !ammo
+	DetectCloaked:
+		CloakTypes: Underwater
+		Range: 5c0
+	RenderDetectionCircle:
+
+MH60:
+	Armament@TERTIARY:
+		Weapon: DepthCharge
+		LocalOffset: 0,-100,0, 0,100,0
+		LocalYaw: 80, -80
+		PauseOnCondition: !ammo
+	DetectCloaked:
+		CloakTypes: Underwater
+		Range: 6c0
+	RenderDetectionCircle:
+
+JEEP:
+	Mobile:
+		TurnSpeed: 50
+		PauseOnCondition: notmobile || being-captured
+
+RIG:
+	Inherits: ^Vehicle
+	Inherits@selection: ^SelectableSupportUnit
+	Buildable:
+		Queue: Vehicle
+		BuildPaletteOrder: 450
+		Prerequisites: ~techlevel.high
+		Description: Allows to place buildings nearby.\n  Unarmed
+	Valued:
+		Cost: 2500
+	Tooltip:
+		Name: Rig
+	Health:
+		HP: 15000
+	Armor:
+		Type: Light
+	Mobile:
+		Speed: 95
+	RevealsShroud:
+		Range: 4c0
+	GivesBuildableArea:
+		AreaTypes: building
+	BaseProvider:
+        PauseOnCondition: too-damaged
+		Range: 3c0
+	GrantConditionOnDamageState@DISABLE:
+		Condition: too-damaged
+		ValidDamageStates: Medium, Heavy, Critical
+	RenderSprites:
+		Image: TRUK
+
+SPDBT:
+	Inherits: ^Ship
+	Inherits@CARGOPIPS: ^CargoPips
+	Buildable:
+		Queue: Ship
+		BuildAtProductionType: Boat
+		BuildPaletteOrder: 0
+		Prerequisites: ~syrd, ~techlevel.low
+		Description: Light fast boat. Can transport 3 people. Unarmed.
+	Valued:
+		Cost: 300
+	Tooltip:
+		Name: Speedboat
+	Contrail@1:
+		Offset: -256,92,-4
+        TrailWidth: 0c192
+        TrailLength: 10
+        UsePlayerColor: false
+	Contrail@2:
+		Offset: -256,-92,-4
+        TrailWidth: 0c192
+        TrailLength: 10
+        UsePlayerColor: false
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Health:
+		HP: 14000
+	Armor:
+		Type: Light
+	Mobile:
+		Locomotor: spdboat
+		TurnSpeed: 25
+        Speed: 190
+		PauseOnCondition: notmobile || being-captured
+	DamagedByTerrain:
+		Terrain: Beach
+		Damage: 200
+		DamageInterval: 16
+	DamagedByTerrain:
+		Terrain: River
+		Damage: 100
+		DamageInterval: 16
+	RevealsShroud:
+		Range: 8c0
+		RevealGeneratedShroud: False
+	RevealsShroud@GAPGEN:
+		Range: 4c0
+	DetectCloaked:
+		CloakTypes: Underwater
+		Range: 3c0
+	Cargo:
+		Types: Infantry
+		MaxWeight: 3
+		LoadingCondition: notmobile
+	-Chronoshiftable:
+	RenderSprites:
+		Image: JEEP
+
+ATLST:
+	Inherits: ^Ship
+	Inherits@CARGOPIPS: ^CargoPips
+	Buildable:
+		Queue: Ship
+		BuildPaletteOrder: 60
+		Prerequisites: ~techlevel.high, techcenter, oilb
+		Description: All-terrain transport.\nCan carry infantry and tanks.\n  Unarmed
+	Valued:
+		Cost: 4500
+	Tooltip:
+		Name: All-terrain transport
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Health:
+		HP: 25000
+	Armor:
+		Type: Heavy
+	Mobile:
+		Locomotor: atcraft
+        Speed: 130
+		PauseOnCondition: notmobile
+	RevealsShroud:
+		MinRange: 4c0
+		Range: 4c0
+		RevealGeneratedShroud: False
+	RevealsShroud@GAPGEN:
+		Range: 3c0
+	WithLandingCraftAnimation:
+		OpenTerrainTypes: Clear, Road, Beach
+	Cargo:
+		Types: Infantry, Vehicle
+		MaxWeight: 3
+		PassengerFacing: 0
+		LoadingCondition: notmobile
+	-Chronoshiftable:
+	Selectable:
+		DecorationBounds: 36,36
+	DamagedByTerrain:
+		Terrain: Rough
+		Damage: 20
+		DamageInterval: 10
+	RenderSprites:
+		Image: LST
+
+
