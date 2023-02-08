@@ -1,0 +1,16 @@
+GodzWeapon:
+	ReloadDelay: 30
+	Range: 1c0
+	Report: dinoatk1.aud
+	Projectile: Bullet
+        Speed: 2c0
+	Warhead@1Dam: SpreadDamage
+		Spread: 213
+		Damage: 10000
+		Versus:
+			None: 100
+			Wood: 35
+			Light: 20
+			Heavy: 7
+		DamageTypes: Prone50Percent, TriggerProne, DefaultDeath
+
