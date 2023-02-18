@@ -27,6 +27,12 @@ Players:
 		NonCombatant: True
 		Faction: england
 		Enemies: Military, Multi0, Multi1, Multi2, Multi3, Multi4, Multi5, Multi6, Multi7, Multi8, Multi9, Multi10, Multi11, Multi12, Multi13, Multi14, Multi15
+	PlayerReference@Scientists:
+		Name: Scientists
+		NonCombatant: True
+		Faction: ukraine
+		Color: F1E110
+		Enemies: Creeps, Multi0, Multi1, Multi2, Multi3, Multi4, Multi5, Multi6, Multi7, Multi8, Multi9, Multi10, Multi11, Multi12, Multi13, Multi14, Multi15
 	PlayerReference@Military:
 		Name: Military
 		NonCombatant: True
@@ -37,82 +43,82 @@ Players:
 		Name: Multi0
 		Playable: True
 		Faction: Random
-		Enemies: Creeps
+		Enemies: Creeps, Military
 	PlayerReference@Multi1:
 		Name: Multi1
 		Playable: True
 		Faction: Random
-		Enemies: Creeps
+		Enemies: Creeps, Military
 	PlayerReference@Multi2:
 		Name: Multi2
 		Playable: True
 		Faction: Random
-		Enemies: Creeps
+		Enemies: Creeps, Military
 	PlayerReference@Multi3:
 		Name: Multi3
 		Playable: True
 		Faction: Random
-		Enemies: Creeps
+		Enemies: Creeps, Military
 	PlayerReference@Multi4:
 		Name: Multi4
 		Playable: True
 		Faction: Random
-		Enemies: Creeps
+		Enemies: Creeps, Military
 	PlayerReference@Multi5:
 		Name: Multi5
 		Playable: True
 		Faction: Random
-		Enemies: Creeps
+		Enemies: Creeps, Military
 	PlayerReference@Multi6:
 		Name: Multi6
 		Playable: True
 		Faction: Random
-		Enemies: Creeps
+		Enemies: Creeps, Military
 	PlayerReference@Multi7:
 		Name: Multi7
 		Playable: True
 		Faction: Random
-		Enemies: Creeps
+		Enemies: Creeps, Military
 	PlayerReference@Multi8:
 		Name: Multi8
 		Playable: True
 		Faction: Random
-		Enemies: Creeps
+		Enemies: Creeps, Military
 	PlayerReference@Multi9:
 		Name: Multi9
 		Playable: True
 		Faction: Random
-		Enemies: Creeps
+		Enemies: Creeps, Military
 	PlayerReference@Multi10:
 		Name: Multi10
 		Playable: True
 		Faction: Random
-		Enemies: Creeps
+		Enemies: Creeps, Military
 	PlayerReference@Multi11:
 		Name: Multi11
 		Playable: True
 		Faction: Random
-		Enemies: Creeps
+		Enemies: Creeps, Military
 	PlayerReference@Multi12:
 		Name: Multi12
 		Playable: True
 		Faction: Random
-		Enemies: Creeps
+		Enemies: Creeps, Military
 	PlayerReference@Multi13:
 		Name: Multi13
 		Playable: True
 		Faction: Random
-		Enemies: Creeps
+		Enemies: Creeps, Military
 	PlayerReference@Multi14:
 		Name: Multi14
 		Playable: True
 		Faction: Random
-		Enemies: Creeps
+		Enemies: Creeps, Military
 	PlayerReference@Multi15:
 		Name: Multi15
 		Playable: True
 		Faction: Random
-		Enemies: Creeps
+		Enemies: Creeps, Military
 
 Actors:
 	SpawnSE: mpspawn
@@ -454,13 +460,13 @@ Actors:
 	EntryNNW3: waypoint
 		Owner: Neutral
 		Location: 0,76
-	EntryNW2: waypoint
+	EntryNW4: waypoint
 		Owner: Neutral
 		Location: 0,154
-	EntryNW1: waypoint
+	EntryNW5: waypoint
 		Owner: Neutral
 		Location: 0,216
-	EntryE: waypoint
+	EntryW: waypoint
 		Owner: Neutral
 		Location: 0,282
 	EntrySW2: waypoint
@@ -478,7 +484,7 @@ Actors:
 	EntrySSW1: waypoint
 		Owner: Neutral
 		Location: 113,511
-	EntrySW1: waypoint
+	EntrySW4: waypoint
 		Owner: Neutral
 		Location: 204,511
 	EntryS: waypoint
@@ -499,13 +505,13 @@ Actors:
 	EntryNE1: waypoint
 		Owner: Neutral
 		Location: 511,167
-	EntryNNE1: waypoint
+	EntryNNE3: waypoint
 		Owner: Neutral
 		Location: 511,69
 	EntryNE: waypoint
 		Owner: Neutral
 		Location: 511,1
-	EntryNE1: waypoint
+	EntryNE2: waypoint
 		Owner: Neutral
 		Location: 452,0
 	Landing01: waypoint
@@ -592,9 +598,6 @@ Actors:
 	Landing29: waypoint
 		Owner: Neutral
 		Location: 56,386
-	Landing29: waypoint
-		Owner: Neutral
-		Location: 115,460
 	Landing30: waypoint
 		Owner: Neutral
 		Location: 191,468
@@ -615,8 +618,8 @@ Actors:
 		Location: 243,451
 	Landing36: waypoint
 		Owner: Neutral
-		Location: 209,481
-	Landing36: waypoint
+		Location: 252,482
+	Landing37: waypoint
 		Owner: Neutral
 		Location: 252,482
 	Landing38: waypoint
@@ -631,7 +634,7 @@ Actors:
 	Landing41: waypoint
 		Owner: Neutral
 		Location: 260,432
-	Landing41: waypoint
+	Landing42: waypoint
 		Owner: Neutral
 		Location: 258,357
 	Landing43: waypoint
@@ -8710,6 +8713,455 @@ Actors:
 	Actor2786: t17
 		Owner: Neutral
 		Location: 481,461
+	Actor2970: cycl
+		Owner: Scientists
+		Location: 210,179
+	Actor2971: cycl
+		Owner: Scientists
+		Location: 209,179
+	Actor2972: cycl
+		Owner: Scientists
+		Location: 208,179
+	Actor2973: cycl
+		Owner: Scientists
+		Location: 207,179
+	Actor2974: cycl
+		Owner: Scientists
+		Location: 206,179
+	Actor2975: cycl
+		Owner: Scientists
+		Location: 205,179
+	Actor2976: cycl
+		Owner: Scientists
+		Location: 204,179
+	Actor2977: cycl
+		Owner: Scientists
+		Location: 203,179
+	Actor2978: cycl
+		Owner: Scientists
+		Location: 202,179
+	Actor2979: cycl
+		Owner: Scientists
+		Location: 201,179
+	Actor2980: cycl
+		Owner: Scientists
+		Location: 200,179
+	Actor2981: cycl
+		Owner: Scientists
+		Location: 199,179
+	Actor2982: cycl
+		Owner: Scientists
+		Location: 199,180
+	Actor2983: cycl
+		Owner: Scientists
+		Location: 199,181
+	Actor2984: cycl
+		Owner: Scientists
+		Location: 199,182
+	Actor2985: cycl
+		Owner: Scientists
+		Location: 199,183
+	Actor2986: cycl
+		Owner: Scientists
+		Location: 199,184
+	Actor2987: cycl
+		Owner: Scientists
+		Location: 199,185
+	Actor2988: cycl
+		Owner: Scientists
+		Location: 199,186
+	Actor2989: cycl
+		Owner: Scientists
+		Location: 199,187
+	Actor2990: cycl
+		Owner: Scientists
+		Location: 213,180
+	Actor2991: cycl
+		Owner: Scientists
+		Location: 213,181
+	Actor2992: cycl
+		Owner: Scientists
+		Location: 213,182
+	Actor2993: cycl
+		Owner: Scientists
+		Location: 214,182
+	Actor2994: cycl
+		Owner: Scientists
+		Location: 214,183
+	Actor2995: cycl
+		Owner: Scientists
+		Location: 214,184
+	Actor2996: cycl
+		Owner: Scientists
+		Location: 214,185
+	Actor2997: cycl
+		Owner: Scientists
+		Location: 213,185
+	Actor2998: cycl
+		Owner: Scientists
+		Location: 213,186
+	Actor2999: cycl
+		Owner: Scientists
+		Location: 213,187
+	Actor3000: cycl
+		Owner: Scientists
+		Location: 213,188
+	Actor3001: cycl
+		Owner: Scientists
+		Location: 213,189
+	Actor3002: cycl
+		Owner: Scientists
+		Location: 212,189
+	Actor3003: gpwr
+		Faction: england
+		Location: 206,184
+		Owner: Scientists
+	Actor3004: iron
+		Faction: england
+		Location: 181,182
+		Owner: Scientists
+	Actor3005: cycl
+		Owner: Scientists
+		Location: 182,179
+	Actor3006: cycl
+		Owner: Scientists
+		Location: 180,179
+	Actor3007: cycl
+		Owner: Scientists
+		Location: 179,179
+	Actor3008: cycl
+		Owner: Scientists
+		Location: 179,180
+	Actor3009: cycl
+		Owner: Scientists
+		Location: 179,180
+	Actor3010: cycl
+		Owner: Scientists
+		Location: 179,181
+	Actor3011: cycl
+		Owner: Scientists
+		Location: 179,182
+	Actor3012: cycl
+		Owner: Scientists
+		Location: 179,183
+	Actor3013: cycl
+		Owner: Scientists
+		Location: 179,184
+	Actor3014: cycl
+		Owner: Scientists
+		Location: 180,184
+	Actor3015: cycl
+		Owner: Scientists
+		Location: 180,185
+	Actor3016: cycl
+		Owner: Scientists
+		Location: 181,185
+	Actor3017: cycl
+		Owner: Scientists
+		Location: 182,185
+	Actor3018: cycl
+		Owner: Scientists
+		Location: 184,185
+	Actor3019: cycl
+		Owner: Scientists
+		Location: 183,185
+	Actor3020: cycl
+		Owner: Scientists
+		Location: 185,185
+	Actor3021: cycl
+		Owner: Scientists
+		Location: 186,185
+	Actor3022: cycl
+		Owner: Scientists
+		Location: 187,185
+	Actor3023: cycl
+		Owner: Scientists
+		Location: 187,184
+	Actor3024: cycl
+		Owner: Scientists
+		Location: 188,184
+	Actor3025: cycl
+		Owner: Scientists
+		Location: 188,183
+	Actor3026: cycl
+		Owner: Scientists
+		Location: 189,183
+	Actor3027: cycl
+		Owner: Scientists
+		Location: 189,182
+	Actor3028: cycl
+		Owner: Scientists
+		Location: 189,181
+	Actor3029: cycl
+		Owner: Scientists
+		Location: 189,180
+	Actor3030: cycl
+		Owner: Scientists
+		Location: 189,179
+	Actor3031: cycl
+		Owner: Scientists
+		Location: 188,179
+	Actor3032: cycl
+		Owner: Scientists
+		Location: 187,179
+	Actor3033: cycl
+		Owner: Scientists
+		Location: 186,179
+	Actor3034: cycl
+		Owner: Scientists
+		Location: 185,179
+	Actor3035: cycl
+		Owner: Scientists
+		Location: 184,179
+	Actor3036: cycl
+		Owner: Scientists
+		Location: 183,179
+	Actor3037: cycl
+		Owner: Scientists
+		Location: 200,187
+	Actor3038: cycl
+		Owner: Scientists
+		Location: 200,188
+	Actor3039: cycl
+		Owner: Scientists
+		Location: 200,189
+	Actor3040: cycl
+		Owner: Scientists
+		Location: 201,189
+	Actor3041: cycl
+		Owner: Scientists
+		Location: 202,189
+	Actor3042: cycl
+		Owner: Scientists
+		Location: 203,189
+	Actor3043: cycl
+		Owner: Scientists
+		Location: 204,189
+	Actor3044: stek
+		Faction: england
+		Location: 202,165
+		Owner: Scientists
+	Actor3045: cycl
+		Owner: Scientists
+		Location: 197,162
+	Actor3046: cycl
+		Owner: Scientists
+		Location: 198,162
+	Actor3047: cycl
+		Owner: Scientists
+		Location: 199,162
+	Actor3048: cycl
+		Owner: Scientists
+		Location: 200,162
+	Actor3049: cycl
+		Owner: Scientists
+		Location: 201,162
+	Actor3050: cycl
+		Owner: Scientists
+		Location: 202,162
+	Actor3051: cycl
+		Owner: Scientists
+		Location: 203,162
+	Actor3052: cycl
+		Owner: Scientists
+		Location: 204,162
+	Actor3053: cycl
+		Owner: Scientists
+		Location: 205,162
+	Actor3054: cycl
+		Owner: Scientists
+		Location: 206,162
+	Actor3055: cycl
+		Owner: Scientists
+		Location: 207,162
+	Actor3056: cycl
+		Owner: Scientists
+		Location: 207,163
+	Actor3057: cycl
+		Owner: Scientists
+		Location: 207,164
+	Actor3058: cycl
+		Owner: Scientists
+		Location: 207,165
+	Actor3059: cycl
+		Owner: Scientists
+		Location: 207,167
+	Actor3060: cycl
+		Owner: Scientists
+		Location: 207,168
+	Actor3061: cycl
+		Owner: Scientists
+		Location: 207,169
+	Actor3062: cycl
+		Owner: Scientists
+		Location: 206,169
+	Actor3063: cycl
+		Owner: Scientists
+		Location: 205,169
+	Actor3064: cycl
+		Owner: Scientists
+		Location: 204,169
+	Actor3065: cycl
+		Owner: Scientists
+		Location: 203,169
+	Actor3066: cycl
+		Owner: Scientists
+		Location: 202,169
+	Actor3067: cycl
+		Owner: Scientists
+		Location: 201,169
+	Actor3068: cycl
+		Owner: Scientists
+		Location: 200,168
+	Actor3069: cycl
+		Owner: Scientists
+		Location: 201,168
+	Actor3070: cycl
+		Owner: Scientists
+		Location: 199,168
+	Actor3071: cycl
+		Owner: Scientists
+		Location: 199,167
+	Actor3072: cycl
+		Owner: Scientists
+		Location: 199,166
+	Actor3073: cycl
+		Owner: Scientists
+		Location: 198,166
+	Actor3074: cycl
+		Owner: Scientists
+		Location: 197,166
+	Actor3075: cycl
+		Owner: Scientists
+		Location: 196,166
+	Actor3076: cycl
+		Owner: Scientists
+		Location: 196,162
+	Actor3077: cycl
+		Owner: Scientists
+		Location: 196,163
+	Actor3078: cycl
+		Owner: Scientists
+		Location: 196,164
+	Actor3079: cycl
+		Owner: Scientists
+		Location: 196,165
+	Actor3080: iron
+		Faction: england
+		Location: 184,166
+		Owner: Scientists
+	Actor3081: gpwr
+		Faction: england
+		Location: 184,152
+		Owner: Scientists
+	Actor3082: bio
+		Faction: england
+		Location: 200,163
+		Owner: Scientists
+	Actor3083: gap
+		Faction: england
+		Location: 201,166
+		Owner: Scientists
+	Actor3084: gap
+		Faction: england
+		Location: 183,182
+		Owner: Scientists
+	Actor3085: gap
+		Faction: england
+		Location: 205,184
+		Owner: Scientists
+	Actor3086: gap
+		Faction: england
+		Location: 184,167
+		Owner: Scientists
+	Actor3087: gap
+		Faction: england
+		Location: 184,153
+		Owner: Scientists
+	Actor3088: agun
+		Faction: england
+		Location: 197,163
+		TurretFacing: 832
+		Owner: Scientists
+	Actor3089: agun
+		Owner: Scientists
+		Location: 186,146
+	Actor3090: agun
+		Owner: Scientists
+		Location: 209,155
+	Actor3091: agun
+		Owner: Scientists
+		Location: 185,169
+	Actor3092: agun
+		Owner: Scientists
+		Location: 188,180
+	Actor3093: agun
+		Owner: Scientists
+		Location: 202,186
+	Actor3094: sam
+		Owner: Scientists
+		Location: 210,181
+	Actor3095: sam
+		Owner: Scientists
+		Location: 181,184
+	Actor3096: sam
+		Owner: Scientists
+		Location: 205,168
+	Actor3097: sam
+		Owner: Scientists
+		Location: 185,153
+	Actor3098: hbox
+		Owner: Scientists
+		Location: 184,154
+	Actor3099: hbox
+		Owner: Scientists
+		Location: 206,165
+	Actor3100: hbox
+		Owner: Scientists
+		Location: 182,180
+	Actor3101: hbox
+		Owner: Scientists
+		Location: 209,181
+	Actor3102: hbox
+		Owner: Scientists
+		Location: 203,187
+	Actor3103: hbox
+		Owner: Scientists
+		Location: 183,177
+	Actor3104: hbox
+		Owner: Scientists
+		Location: 185,164
+	Actor3105: hbox
+		Owner: Scientists
+		Location: 210,167
+	Actor3106: gun
+		Owner: Scientists
+		Location: 199,173
+	Actor3107: gun
+		Owner: Scientists
+		Location: 193,170
+	Actor3108: hbox
+		Owner: Scientists
+		Location: 194,171
+	Actor3109: hbox
+		Owner: Scientists
+		Location: 196,174
+	Actor3110: tsla
+		Owner: Scientists
+		Location: 208,184
+	Actor3111: tsla
+		Owner: Scientists
+		Location: 184,182
+	Actor3112: tsla
+		Owner: Scientists
+		Location: 183,166
+	Actor3113: tsla
+		Owner: Scientists
+		Location: 184,150
+	Actor3114: tsla
+		Faction: england
+		Location: 199,165
+		Owner: Scientists
 	Actor2789: lhus
 		Owner: Neutral
 		Location: 447,14

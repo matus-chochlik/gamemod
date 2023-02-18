@@ -3,12 +3,12 @@ World:
 		Scripts: swamp.lua
 	Locomotor@WHEELED:
 		TerrainSpeeds:
-            Road: 160
+            Road: 145
             Bridge: 120
 	Locomotor@HEAVYWHEELED:
 		TerrainSpeeds:
-            Road: 140
-            Bridge: 110
+            Road: 130
+            Bridge: 100
 	Locomotor@SPEEDBOAT:
 		Name: spdboat
 		Crushes: crate
@@ -20,12 +20,12 @@ World:
 				PathingCost: 32000
 	Locomotor@ATCRAFT:
 		Name: atcraft
-		Crushes: crate, mine
+		Crushes: crate
 		TerrainSpeeds:
 			Clear: 100
-			Water: 105
+			Water: 115
 			Beach: 80
-			Road: 120
+			Road: 110
 			Bridge: 90
 				PathingCost: 50
 			Ore: 60
@@ -36,6 +36,25 @@ World:
 				PathingCost: 1600
 			Rough: 30
 				PathingCost: 2000
+
+Player:
+	BaseBuilderBotModule@rush:
+		PowerTypes: powr,apwr,gpwr
+		BuildingFractions:
+			gpwr: 1
+	BaseBuilderBotModule@normal:
+		PowerTypes: powr,apwr,gpwr
+		BuildingFractions:
+			gpwr: 1
+	BaseBuilderBotModule@turtle:
+		PowerTypes: powr,apwr,gpwr
+		BuildingFractions:
+			gpwr: 1
+	BaseBuilderBotModule@naval:
+		PowerTypes: powr,apwr,gpwr
+		BuildingFractions:
+			gpwr: 1
+
 
 DOME:
 	Inherits@shape: ^3x2Shape
@@ -53,7 +72,7 @@ DOME:
 		Name: Radar center
 	RevealsShroud:
 		MinRange: 8c0
-		Range: 14c0
+		Range: 16c0
 		RequiresCondition: !disabled
 		RevealGeneratedShroud: False
 	RevealsShroud@Offline:
@@ -65,9 +84,47 @@ DOME:
 	RenderSprites:
 		Image: miss
 
+GPWR:
+	Inherits: ^Building
+	Inherits@POWER_OUTAGE: ^DisabledByPowerOutage
+	Inherits@shape: ^2x1Shape
+	HitShape:
+		UseTargetableCellsOffsets: false
+		TargetableOffsets: 0,0,0, 630,-384,0, 630,384,0, -700,-512,0, -700,512,0
+	Buildable:
+		Queue: Building
+		BuildPaletteOrder: 220
+		Prerequisites: weap, dome, techcenter
+		Description: Provides much more power than\na standard Power Plant.
+	Valued:
+		Cost: 2500
+	Tooltip:
+		Name: Geothermal power plant
+	ProvidesPrerequisite@buildingname:
+	ProvidesPrerequisite:
+		Prerequisite: anypower
+	Building:
+		Footprint: xx
+		Dimensions: 2,1
+	Selectable:
+		Bounds: 48,28,0,2
+		DecorationBounds: 50,50,0,-12
+	Health:
+		HP: 100000
+	Armor:
+		Type: Concrete
+	RevealsShroud:
+		Range: 5c0
+	WithBuildingBib:
+	Power:
+		Amount: 2000
+	Targetable:
+		TargetTypes: GroundActor, Structure, DemoTruck, DetonateAttack
+	ScalePowerWithHealth:
+
 MSLO:
 	Valued:
-		Cost: 7500
+		Cost: 12500
 
 LHUS:
 	Health:
