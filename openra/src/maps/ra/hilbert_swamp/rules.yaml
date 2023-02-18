@@ -1,17 +1,19 @@
 World:
+	LuaScript:
+		Scripts: swamp.lua
 	Locomotor@WHEELED:
 		TerrainSpeeds:
-            Road: 150
+            Road: 160
             Bridge: 120
 	Locomotor@HEAVYWHEELED:
 		TerrainSpeeds:
-            Road: 135
+            Road: 140
             Bridge: 110
 	Locomotor@SPEEDBOAT:
 		Name: spdboat
 		Crushes: crate
 		TerrainSpeeds:
-			Water: 120
+			Water: 130
 			River: 20
 				PathingCost: 16000
 			Beach: 15
