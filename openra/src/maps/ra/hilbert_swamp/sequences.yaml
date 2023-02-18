@@ -22,6 +22,9 @@ atlst:
 miss:
     icon: domeicon
 
+lhus:
+    icon: domeicon
+
 spdboat:
 	idle:
 		Facings: 32
