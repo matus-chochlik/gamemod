@@ -8816,7 +8816,7 @@ Actors:
 		Faction: england
 		Location: 206,184
 		Owner: Scientists
-	Actor3004: iron
+	Actor3004: gpwr
 		Faction: england
 		Location: 181,182
 		Owner: Scientists
@@ -9046,7 +9046,7 @@ Actors:
 	Actor3079: cycl
 		Owner: Scientists
 		Location: 196,165
-	Actor3080: iron
+	Actor3080: gpwr
 		Faction: england
 		Location: 184,166
 		Owner: Scientists
