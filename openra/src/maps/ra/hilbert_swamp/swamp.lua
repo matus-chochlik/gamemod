@@ -112,6 +112,61 @@ SpawnMilitaryRaid = function()
     )
 end
 
+SpawnCreeps = function()
+    local creeps = Player.GetPlayer("Creeps")
+
+    local spawnpoints = {
+		CreepSpawn01, CreepSpawn02, CreepSpawn03,
+		CreepSpawn04, CreepSpawn05, CreepSpawn06
+    }
+    local huntpoints = {
+		Landing01, Landing02, Landing03, Landing04, Landing05, Landing06,
+		Landing07, Landing08, Landing09, Landing10, Landing11, Landing12,
+		Landing13, Landing14, Landing15, Landing16, Landing17, Landing18,
+		Landing20, Landing21, Landing22, Landing23, Landing24, Landing25,
+		Landing26, Landing27, Landing28, Landing29, Landing30, Landing31,
+		Landing32, Landing33, Landing34, Landing35, Landing36, Landing37,
+		Landing38, Landing39, Landing40, Landing41, Landing42, Landing43,
+		Landing44, Landing45, Landing46, Landing47, Landing48, Landing49,
+		Landing50, Landing51, Landing52, Landing53, Landing54,
+    }
+    local entry = Utils.Random(spawnpoints)
+    local start = Utils.Random(huntpoints)
+
+	if Utils.RandomInteger(0, 1) == 0
+	then
+		local pop = creeps.GetActorsByType("bldskr")
+		if #pop < 30 then
+			Utils.Do(
+				Reinforcements.Reinforce(
+					creeps,
+					{"bldskr", "bldskr"},
+					{entry.Location, start.Location}
+				),
+				function(z) Trigger.OnIdle(z, z.Hunt) end
+			)
+		end
+	else
+		local pop = creeps.GetActorsByType("dog")
+		if #pop < 120 then
+			Utils.Do(
+				Reinforcements.Reinforce(
+					creeps,
+					{"dog", "dog", "dog", "dog", "dog"},
+					{entry.Location, start.Location}
+				),
+				function(z) Trigger.OnIdle(z, z.Hunt) end
+			)
+		end
+	end
+
+    Trigger.AfterDelay(
+        DateTime.Seconds(Utils.RandomInteger(30, 45)),
+        SpawnCreeps
+    )
+end
+
 WorldLoaded = function()
     Trigger.AfterDelay(DateTime.Seconds(120), SpawnMilitaryRaid)
+    Trigger.AfterDelay(DateTime.Seconds(35), SpawnCreeps)
 end

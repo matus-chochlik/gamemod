@@ -14,3 +14,22 @@ GodzWeapon:
 			Heavy: 7
 		DamageTypes: Prone50Percent, TriggerProne, DefaultDeath
 
+BloodSuck:
+	ReloadDelay: 45
+	Range: 1c512
+	Report: dinoatk1.aud
+	ValidTargets: Ground, GroundActor
+	Projectile: Bullet
+		Speed: 2c0
+	Warhead@1Dam: SpreadDamage
+		Spread: 128
+		Damage: 12000
+		ValidTargets: GroundActor
+		Versus:
+			None: 128
+			Wood: 20
+			Light: 20
+			Heavy: 1
+			Concrete: 1
+		DamageTypes: Prone50Percent, TriggerProne, DefaultDeath
+

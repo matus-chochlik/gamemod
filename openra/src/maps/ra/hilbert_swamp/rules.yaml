@@ -177,7 +177,7 @@ MIG:
 U2:
 	Aircraft:
 		TurnSpeed: 20
-		Speed: 300
+		Speed: 380
 	RevealsShroud:
 		Range: 5c0
 		Type: GroundPosition
@@ -352,5 +352,36 @@ ATLST:
 		DamageInterval: 10
 	RenderSprites:
 		Image: LST
+
+
+BLDSKR:
+	Inherits: ^Soldier
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Tooltip:
+		Name: Swamp bloodsucker
+	Health:
+		HP: 25000
+	Mobile:
+		Speed: 92
+	Cloak:
+		InitialDelay: 90
+		CloakDelay: 30
+		UncloakOn: Attack, Move, Heal
+		IsPlayerPalette: true
+		PauseOnCondition: uncloak-when-damaged
+	GrantConditionOnDamageState@UNCLOAK:
+		Condition: uncloak-when-damaged
+		ValidDamageStates: Critical
+	AutoTarget:
+		ScanRadius: 15
+	WithInfantryBody:
+		DefaultAttackSequence: bite
+		IdleSequences: idle1
+	Armament:
+		Weapon: bloodsuck
+	Voiced:
+		VoiceSet: AntVoice
+	RenderSprites:
+		Image: ZOMBIE
 
 
