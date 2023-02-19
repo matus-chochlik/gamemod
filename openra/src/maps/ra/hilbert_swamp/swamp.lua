@@ -18,22 +18,6 @@ SetupRaidActors = function(transp, units)
         function(a)
             if a == cannon then
                 Trigger.OnIdle(a, a.Hunt)
-				Trigger.OnAddedToWorld(
-					a,
-					function(c)
-						Utils.Do(
-							Player.GetPlayers(function(p) return p.IsLocalPlayer end),
-							function(p)
-								Radar.Ping(
-									p,
-									Map.CenterOfCell(c.Location),
-									HSLColor.Yellow,
-									200
-								)
-							end
-					    )
-					end
-				)
             else
                 Trigger.OnIdle(
                     a,
@@ -83,13 +67,44 @@ SpawnMilitaryRaid = function()
 		end
 	)
 
-    local spawned = Reinforcements.ReinforceWithTransport(
-        military, "atlst",
-        {"arty", "1tnk", "jeep", "jeep", "ftrk"},
-        {entry.Location, landing.Location},
-        {landing.Location, exit.Location}
-    )
-	SetupRaidActors(spawned[1], spawned[2])
+	local spawned = nil
+	if Utils.RandomInteger(0, 1) == 0
+		and Map.TerrainType(entry.Location) == "Water"
+		and Map.TerrainType(exit.Location) == "Water"
+	then
+		spawned = Reinforcements.ReinforceWithTransport(
+			military, "spdbt",
+			{"e7", "e1", "e3"},
+			{entry.Location, landing.Location},
+			{landing.Location, exit.Location}
+		)
+		StartHuntParty(spawned[2])
+	else
+		spawned = Reinforcements.ReinforceWithTransport(
+			military, "atlst",
+			{"arty", "1tnk", "jeep", "jeep", "ftrk"},
+			{entry.Location, landing.Location},
+			{landing.Location, exit.Location}
+		)
+		SetupRaidActors(spawned[1], spawned[2])
+	end
+
+	Trigger.OnAddedToWorld(
+		spawned[2][1],
+		function(c)
+			Utils.Do(
+				Player.GetPlayers(function(p) return p.IsLocalPlayer end),
+				function(p)
+					Radar.Ping(
+						p,
+						Map.CenterOfCell(c.Location),
+						HSLColor.Yellow,
+						200
+					)
+				end
+			)
+		end
+	)
 
     Trigger.AfterDelay(
         DateTime.Seconds(Utils.RandomInteger(60, 120)),

@@ -326,6 +326,10 @@ ATLST:
 		Locomotor: atcraft
         Speed: 130
 		PauseOnCondition: notmobile
+    Targetable:
+        TargetTypes: WaterActor, Ship, GroundActor, Vehicle
+    Repairable:
+          RepairActors: fix
 	RevealsShroud:
 		MinRange: 4c0
 		Range: 4c0
