@@ -435,85 +435,85 @@ Actors:
 		Location: 158,485
 	EntryNNE1: waypoint
 		Owner: Neutral
-		Location: 409,0
+		Location: 409,1
 	EntryNNE2: waypoint
 		Owner: Neutral
-		Location: 311,0
+		Location: 311,1
 	EntryN1: waypoint
 		Owner: Neutral
-		Location: 288,0
+		Location: 288,1
 	EntryN2: waypoint
 		Owner: Neutral
-		Location: 243,0
+		Location: 243,1
 	EntryNNW1: waypoint
 		Owner: Neutral
-		Location: 195,0
+		Location: 195,1
 	EntryNNW2: waypoint
 		Owner: Neutral
-		Location: 116,0
+		Location: 116,1
 	EntryNW2: waypoint
 		Owner: Neutral
-		Location: 62,0
+		Location: 62,1
 	EntryNW1: waypoint
 		Owner: Neutral
-		Location: 0,0
+		Location: 1,1
 	EntryNNW3: waypoint
 		Owner: Neutral
-		Location: 0,76
+		Location: 1,76
 	EntryNW4: waypoint
 		Owner: Neutral
-		Location: 0,154
+		Location: 1,154
 	EntryNW5: waypoint
 		Owner: Neutral
-		Location: 0,216
+		Location: 1,216
 	EntryW: waypoint
 		Owner: Neutral
-		Location: 0,282
+		Location: 1,282
 	EntrySW2: waypoint
 		Owner: Neutral
-		Location: 0,366
+		Location: 1,366
 	EntrySW1: waypoint
 		Owner: Neutral
-		Location: 0,418
+		Location: 1,418
 	EntrySW3: waypoint
 		Owner: Neutral
-		Location: 0,511
+		Location: 1,510
 	EntrySSW2: waypoint
 		Owner: Neutral
-		Location: 70,511
+		Location: 70,510
 	EntrySSW1: waypoint
 		Owner: Neutral
-		Location: 113,511
+		Location: 113,510
 	EntrySW4: waypoint
 		Owner: Neutral
-		Location: 204,511
+		Location: 204,510
 	EntryS: waypoint
 		Owner: Neutral
-		Location: 301,511
+		Location: 301,510
 	EntrySE1: waypoint
 		Owner: Neutral
-		Location: 407,511
+		Location: 407,510
 	EntrySE2: waypoint
 		Owner: Neutral
-		Location: 511,442
+		Location: 510,442
 	EntrySSE1: waypoint
 		Owner: Neutral
-		Location: 511,346
+		Location: 510,346
 	EntryE: waypoint
 		Owner: Neutral
-		Location: 511,258
+		Location: 510,258
 	EntryNE1: waypoint
 		Owner: Neutral
-		Location: 511,167
+		Location: 510,167
 	EntryNNE3: waypoint
 		Owner: Neutral
-		Location: 511,69
+		Location: 510,69
 	EntryNE: waypoint
 		Owner: Neutral
-		Location: 511,1
+		Location: 510,1
 	EntryNE2: waypoint
 		Owner: Neutral
-		Location: 452,0
+		Location: 452,1
 	Landing01: waypoint
 		Owner: Neutral
 		Location: 476,130

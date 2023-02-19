@@ -37,9 +37,6 @@ gpwr:
 		UseTilesetExtension: true
 	icon: ironicon
 
-lhus:
-    icon: domeicon
-
 spdboat:
 	idle:
 		Facings: 32
