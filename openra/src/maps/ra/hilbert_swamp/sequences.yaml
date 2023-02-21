@@ -1,3 +1,9 @@
+dthtrk:
+	idle:
+		Facings: 32
+		UseClassicFacings: True
+	icon: trukicon
+
 rig:
 	idle:
 		Facings: 32

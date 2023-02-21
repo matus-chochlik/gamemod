@@ -21,7 +21,7 @@ Players:
 		Name: Neutral
 		OwnsWorld: True
 		NonCombatant: True
-		Faction: england
+		Faction: ukraine
 	PlayerReference@Creeps:
 		Name: Creeps
 		NonCombatant: True
@@ -32,93 +32,99 @@ Players:
 		NonCombatant: True
 		Faction: ukraine
 		Color: F1E110
-		Enemies: Creeps, Multi0, Multi1, Multi2, Multi3, Multi4, Multi5, Multi6, Multi7, Multi8, Multi9, Multi10, Multi11, Multi12, Multi13, Multi14, Multi15
+		Enemies: Monolith, Multi0, Multi1, Multi2, Multi3, Multi4, Multi5, Multi6, Multi7, Multi8, Multi9, Multi10, Multi11, Multi12, Multi13, Multi14, Multi15
 	PlayerReference@Military:
 		Name: Military
 		NonCombatant: True
 		Faction: ukraine
-		Color: 010110
-		Enemies: Creeps, Multi0, Multi1, Multi2, Multi3, Multi4, Multi5, Multi6, Multi7, Multi8, Multi9, Multi10, Multi11, Multi12, Multi13, Multi14, Multi15
+		Color: 014010
+		Enemies: Creeps, Monolith, Multi0, Multi1, Multi2, Multi3, Multi4, Multi5, Multi6, Multi7, Multi8, Multi9, Multi10, Multi11, Multi12, Multi13, Multi14, Multi15
+	PlayerReference@Monolith:
+		Name: Monolith
+		NonCombatant: True
+		Faction: ukraine
+		Color: 404040
+		Enemies: Military, Scientists, Multi0, Multi1, Multi2, Multi3, Multi4, Multi5, Multi6, Multi7, Multi8, Multi9, Multi10, Multi11, Multi12, Multi13, Multi14, Multi15
 	PlayerReference@Multi0:
 		Name: Multi0
 		Playable: True
 		Faction: Random
-		Enemies: Creeps, Military
+		Enemies: Creeps, Military, Monolith
 	PlayerReference@Multi1:
 		Name: Multi1
 		Playable: True
 		Faction: Random
-		Enemies: Creeps, Military
+		Enemies: Creeps, Military, Monolith
 	PlayerReference@Multi2:
 		Name: Multi2
 		Playable: True
 		Faction: Random
-		Enemies: Creeps, Military
+		Enemies: Creeps, Military, Monolith
 	PlayerReference@Multi3:
 		Name: Multi3
 		Playable: True
 		Faction: Random
-		Enemies: Creeps, Military
+		Enemies: Creeps, Military, Monolith
 	PlayerReference@Multi4:
 		Name: Multi4
 		Playable: True
 		Faction: Random
-		Enemies: Creeps, Military
+		Enemies: Creeps, Military, Monolith
 	PlayerReference@Multi5:
 		Name: Multi5
 		Playable: True
 		Faction: Random
-		Enemies: Creeps, Military
+		Enemies: Creeps, Military, Monolith
 	PlayerReference@Multi6:
 		Name: Multi6
 		Playable: True
 		Faction: Random
-		Enemies: Creeps, Military
+		Enemies: Creeps, Military, Monolith
 	PlayerReference@Multi7:
 		Name: Multi7
 		Playable: True
 		Faction: Random
-		Enemies: Creeps, Military
+		Enemies: Creeps, Military, Monolith
 	PlayerReference@Multi8:
 		Name: Multi8
 		Playable: True
 		Faction: Random
-		Enemies: Creeps, Military
+		Enemies: Creeps, Military, Monolith
 	PlayerReference@Multi9:
 		Name: Multi9
 		Playable: True
 		Faction: Random
-		Enemies: Creeps, Military
+		Enemies: Creeps, Military, Monolith
 	PlayerReference@Multi10:
 		Name: Multi10
 		Playable: True
 		Faction: Random
-		Enemies: Creeps, Military
+		Enemies: Creeps, Military, Monolith
 	PlayerReference@Multi11:
 		Name: Multi11
 		Playable: True
 		Faction: Random
-		Enemies: Creeps, Military
+		Enemies: Creeps, Military, Monolith
 	PlayerReference@Multi12:
 		Name: Multi12
 		Playable: True
 		Faction: Random
-		Enemies: Creeps, Military
+		Enemies: Creeps, Military, Monolith
 	PlayerReference@Multi13:
 		Name: Multi13
 		Playable: True
 		Faction: Random
-		Enemies: Creeps, Military
+		Enemies: Creeps, Military, Monolith
 	PlayerReference@Multi14:
 		Name: Multi14
 		Playable: True
 		Faction: Random
-		Enemies: Creeps, Military
+		Enemies: Creeps, Military, Monolith
 	PlayerReference@Multi15:
 		Name: Multi15
 		Playable: True
 		Faction: Random
-		Enemies: Creeps, Military
+		Enemies: Creeps, Military, Monolith
 
 Actors:
 	SpawnSE: mpspawn
@@ -691,6 +697,9 @@ Actors:
 	Landing54: waypoint
 		Owner: Neutral
 		Location: 415,472
+	EntrySE3: waypoint
+		Owner: Neutral
+		Location: 510,458
 	Actor106: oilb
 		Owner: Neutral
 		Location: 5,379
@@ -8831,11 +8840,9 @@ Actors:
 		Owner: Scientists
 		Location: 212,189
 	Actor3003: gpwr
-		Faction: england
 		Location: 206,184
 		Owner: Scientists
 	Actor3004: gpwr
-		Faction: england
 		Location: 181,182
 		Owner: Scientists
 	Actor3005: cycl
@@ -8956,7 +8963,6 @@ Actors:
 		Owner: Scientists
 		Location: 204,189
 	Actor3044: stek
-		Faction: england
 		Location: 202,165
 		Owner: Scientists
 	Actor3045: cycl
@@ -9065,39 +9071,30 @@ Actors:
 		Owner: Scientists
 		Location: 196,165
 	Actor3080: gpwr
-		Faction: england
 		Location: 184,166
 		Owner: Scientists
 	Actor3081: gpwr
-		Faction: england
 		Location: 184,152
 		Owner: Scientists
 	Actor3082: bio
-		Faction: england
 		Location: 200,163
 		Owner: Scientists
 	Actor3083: gap
-		Faction: england
 		Location: 201,166
 		Owner: Scientists
 	Actor3084: gap
-		Faction: england
 		Location: 183,182
 		Owner: Scientists
 	Actor3085: gap
-		Faction: england
 		Location: 205,184
 		Owner: Scientists
 	Actor3086: gap
-		Faction: england
 		Location: 184,167
 		Owner: Scientists
 	Actor3087: gap
-		Faction: england
 		Location: 184,153
 		Owner: Scientists
 	Actor3088: agun
-		Faction: england
 		Location: 197,163
 		TurretFacing: 832
 		Owner: Scientists
@@ -9177,7 +9174,6 @@ Actors:
 		Owner: Scientists
 		Location: 184,150
 	Actor3114: tsla
-		Faction: england
 		Location: 199,165
 		Owner: Scientists
 	Actor3115: cycl

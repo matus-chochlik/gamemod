@@ -215,6 +215,34 @@ JEEP:
 		TurnSpeed: 50
 		PauseOnCondition: notmobile || being-captured
 
+DTHTRK:
+	Inherits: ^Vehicle
+	Inherits@selection: ^SelectableSupportUnit
+	Inherits@CARGOPIPS: ^CargoPips
+	Tooltip:
+		Name: Death Truck
+	Health:
+		HP: 16000
+	Armor:
+		Type: Light
+	Mobile:
+		Speed: 130
+	DamagedByTerrain:
+		Terrain: Rough
+		Damage: 20
+		DamageInterval: 16
+	RevealsShroud:
+		Range: 4c0
+	Cargo:
+		Types: Infantry
+		MaxWeight: 9
+		LoadingCondition: notmobile
+	SpawnActorOnDeath:
+		Actor: moneycrate
+	RenderSprites:
+		Image: TRUK
+
+
 RIG:
 	Inherits: ^Vehicle
 	Inherits@selection: ^SelectableSupportUnit
