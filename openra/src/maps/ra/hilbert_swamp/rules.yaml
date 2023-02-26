@@ -394,7 +394,7 @@ BLDSKR:
 	Cloak:
 		InitialDelay: 90
 		CloakDelay: 30
-		UncloakOn: Attack, Move, Heal
+		UncloakOn: Attack, Heal
 		IsPlayerPalette: true
 		PauseOnCondition: uncloak-when-damaged
 	GrantConditionOnDamageState@UNCLOAK:

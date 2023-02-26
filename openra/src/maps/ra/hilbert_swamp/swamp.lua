@@ -1,31 +1,19 @@
-StartHunt = function(a)
-    if a.HasProperty("Hunt") then
-        Trigger.OnIdle(a, a.Hunt)
-    end
-end
-
-StartHuntParty = function(l)
-    Utils.Do(l, function(a)
-        StartHunt(a)
-    end)
-end
-
-SetupRaidActors = function(transp, units)
-    local cannon = units[1]
+SetupRaidActors = function(units)
+    local leader = units[1]
 
     Utils.Do(
         units,
         function(a)
-            if a == cannon then
+            if a == leader then
                 Trigger.OnIdle(a, a.Hunt)
             else
                 Trigger.OnIdle(
                     a,
                     function()
-                        if cannon.IsDead then
+                        if leader.IsDead then
                             a.Hunt()
                         else
-                            a.Guard(cannon)
+                            a.Guard(leader)
                         end
                     end
                 )
@@ -68,8 +56,7 @@ SpawnMilitaryRaid = function()
 	)
 
 	local spawned = nil
-	if Utils.RandomInteger(0, 1) == 0
-		and Map.TerrainType(entry.Location) == "Water"
+	if Map.TerrainType(entry.Location) == "Water"
 		and Map.TerrainType(exit.Location) == "Water"
 	then
 		spawned = Reinforcements.ReinforceWithTransport(
@@ -78,15 +65,26 @@ SpawnMilitaryRaid = function()
 			{entry.Location, landing.Location},
 			{landing.Location, exit.Location}
 		)
-		StartHuntParty(spawned[2])
+		SetupRaidActors(spawned[2])
 	else
-		spawned = Reinforcements.ReinforceWithTransport(
-			military, "atlst",
-			{"arty", "1tnk", "jeep", "jeep", "ftrk"},
-			{entry.Location, landing.Location},
-			{landing.Location, exit.Location}
-		)
-		SetupRaidActors(spawned[1], spawned[2])
+		if Utils.RandomInteger(0, 2) == 0
+		then
+			spawned = Reinforcements.ReinforceWithTransport(
+				military, "tran",
+				{"e7", "e1", "e1", "e1", "e2", "e2", "e3", "e3"},
+				{entry.Location, landing.Location},
+				{landing.Location, exit.Location}
+			)
+			SetupRaidActors(spawned[2])
+		else
+			spawned = Reinforcements.ReinforceWithTransport(
+				military, "atlst",
+				{"arty", "1tnk", "jeep", "jeep", "ftrk"},
+				{entry.Location, landing.Location},
+				{landing.Location, exit.Location}
+			)
+			SetupRaidActors(spawned[2])
+		end
 	end
 
 	Trigger.OnAddedToWorld(
@@ -142,11 +140,11 @@ SpawnMonolithRaid = function()
 
 	spawned = Reinforcements.ReinforceWithTransport(
 		monolith, "dthtrk",
-		{"e1", "e1", "e1", "e2", "e2", "e3", "e3", "e4", "sniper"},
+		{"sniper", "e1", "e1", "e1", "e2", "e2", "e3", "e3", "e4"},
 		{entry.Location, start.Location},
 		{start.Location, exit.Location}
 	)
-	StartHuntParty(spawned[2])
+	SetupRaidActors(spawned[2])
 
     Trigger.AfterDelay(
         DateTime.Seconds(Utils.RandomInteger(50, 100)),
@@ -175,26 +173,26 @@ SpawnCreeps = function()
     local entry = Utils.Random(spawnpoints)
     local start = Utils.Random(huntpoints)
 
-	if Utils.RandomInteger(0, 1) == 0
+	if Utils.RandomInteger(0, 2) == 0
 	then
-		local pop = creeps.GetActorsByType("bldskr")
-		if #pop < 30 then
-			Utils.Do(
-				Reinforcements.Reinforce(
-					creeps,
-					{"bldskr", "bldskr"},
-					{entry.Location, start.Location}
-				),
-				function(z) Trigger.OnIdle(z, z.Hunt) end
-			)
-		end
-	else
 		local pop = creeps.GetActorsByType("dog")
 		if #pop < 120 then
 			Utils.Do(
 				Reinforcements.Reinforce(
 					creeps,
 					{"dog", "dog", "dog", "dog", "dog"},
+					{entry.Location, start.Location}
+				),
+				function(z) Trigger.OnIdle(z, z.Hunt) end
+			)
+		end
+	else
+		local pop = creeps.GetActorsByType("bldskr")
+		if #pop < 30 then
+			Utils.Do(
+				Reinforcements.Reinforce(
+					creeps,
+					{"bldskr", "bldskr"},
 					{entry.Location, start.Location}
 				),
 				function(z) Trigger.OnIdle(z, z.Hunt) end
