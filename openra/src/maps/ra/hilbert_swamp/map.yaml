@@ -26,105 +26,117 @@ Players:
 		Name: Creeps
 		NonCombatant: True
 		Faction: england
-		Enemies: Military, Multi0, Multi1, Multi2, Multi3, Multi4, Multi5, Multi6, Multi7, Multi8, Multi9, Multi10, Multi11, Multi12, Multi13, Multi14, Multi15
+		Enemies: Military, Bandits, Multi0, Multi1, Multi2, Multi3, Multi4, Multi5, Multi6, Multi7, Multi8, Multi9, Multi10, Multi11, Multi12, Multi13, Multi14, Multi15
+	PlayerReference@Loners:
+		Name: Loners
+		NonCombatant: True
+		Faction: ukraine
+		Color: A0B0A0
+		Enemies: Military, Monolith, Bandits, Creeps
+	PlayerReference@Bandits:
+		Name: Bandits
+		NonCombatant: True
+		Faction: russia
+		Color: 303030
+		Enemies: Monolith, Loners, Military, Scientists, Creeps, Multi0, Multi1, Multi2, Multi3, Multi4, Multi5, Multi6, Multi7, Multi8, Multi9, Multi10, Multi11, Multi12, Multi13, Multi14, Multi15
 	PlayerReference@Scientists:
 		Name: Scientists
 		NonCombatant: True
 		Faction: ukraine
 		Color: F1E110
-		Enemies: Monolith, Multi0, Multi1, Multi2, Multi3, Multi4, Multi5, Multi6, Multi7, Multi8, Multi9, Multi10, Multi11, Multi12, Multi13, Multi14, Multi15
+		Enemies: Monolith, Bandits, Multi0, Multi1, Multi2, Multi3, Multi4, Multi5, Multi6, Multi7, Multi8, Multi9, Multi10, Multi11, Multi12, Multi13, Multi14, Multi15
 	PlayerReference@Military:
 		Name: Military
 		NonCombatant: True
 		Faction: ukraine
 		Color: 014010
-		Enemies: Creeps, Monolith, Multi0, Multi1, Multi2, Multi3, Multi4, Multi5, Multi6, Multi7, Multi8, Multi9, Multi10, Multi11, Multi12, Multi13, Multi14, Multi15
+		Enemies: Creeps, Monolith, Bandits, Multi0, Multi1, Multi2, Multi3, Multi4, Multi5, Multi6, Multi7, Multi8, Multi9, Multi10, Multi11, Multi12, Multi13, Multi14, Multi15
 	PlayerReference@Monolith:
 		Name: Monolith
 		NonCombatant: True
 		Faction: ukraine
 		Color: 404040
-		Enemies: Military, Scientists, Multi0, Multi1, Multi2, Multi3, Multi4, Multi5, Multi6, Multi7, Multi8, Multi9, Multi10, Multi11, Multi12, Multi13, Multi14, Multi15
+		Enemies: Military, Scientists, Bandits, Multi0, Multi1, Multi2, Multi3, Multi4, Multi5, Multi6, Multi7, Multi8, Multi9, Multi10, Multi11, Multi12, Multi13, Multi14, Multi15
 	PlayerReference@Multi0:
 		Name: Multi0
 		Playable: True
 		Faction: Random
-		Enemies: Creeps, Military, Monolith
+		Enemies: Creeps, Military, Bandits, Monolith
 	PlayerReference@Multi1:
 		Name: Multi1
 		Playable: True
 		Faction: Random
-		Enemies: Creeps, Military, Monolith
+		Enemies: Creeps, Military, Bandits, Monolith
 	PlayerReference@Multi2:
 		Name: Multi2
 		Playable: True
 		Faction: Random
-		Enemies: Creeps, Military, Monolith
+		Enemies: Creeps, Military, Bandits, Monolith
 	PlayerReference@Multi3:
 		Name: Multi3
 		Playable: True
 		Faction: Random
-		Enemies: Creeps, Military, Monolith
+		Enemies: Creeps, Military, Bandits, Monolith
 	PlayerReference@Multi4:
 		Name: Multi4
 		Playable: True
 		Faction: Random
-		Enemies: Creeps, Military, Monolith
+		Enemies: Creeps, Military, Bandits, Monolith
 	PlayerReference@Multi5:
 		Name: Multi5
 		Playable: True
 		Faction: Random
-		Enemies: Creeps, Military, Monolith
+		Enemies: Creeps, Military, Bandits, Monolith
 	PlayerReference@Multi6:
 		Name: Multi6
 		Playable: True
 		Faction: Random
-		Enemies: Creeps, Military, Monolith
+		Enemies: Creeps, Military, Bandits, Monolith
 	PlayerReference@Multi7:
 		Name: Multi7
 		Playable: True
 		Faction: Random
-		Enemies: Creeps, Military, Monolith
+		Enemies: Creeps, Military, Bandits, Monolith
 	PlayerReference@Multi8:
 		Name: Multi8
 		Playable: True
 		Faction: Random
-		Enemies: Creeps, Military, Monolith
+		Enemies: Creeps, Military, Bandits, Monolith
 	PlayerReference@Multi9:
 		Name: Multi9
 		Playable: True
 		Faction: Random
-		Enemies: Creeps, Military, Monolith
+		Enemies: Creeps, Military, Bandits, Monolith
 	PlayerReference@Multi10:
 		Name: Multi10
 		Playable: True
 		Faction: Random
-		Enemies: Creeps, Military, Monolith
+		Enemies: Creeps, Military, Bandits, Monolith
 	PlayerReference@Multi11:
 		Name: Multi11
 		Playable: True
 		Faction: Random
-		Enemies: Creeps, Military, Monolith
+		Enemies: Creeps, Military, Bandits, Monolith
 	PlayerReference@Multi12:
 		Name: Multi12
 		Playable: True
 		Faction: Random
-		Enemies: Creeps, Military, Monolith
+		Enemies: Creeps, Military, Bandits, Monolith
 	PlayerReference@Multi13:
 		Name: Multi13
 		Playable: True
 		Faction: Random
-		Enemies: Creeps, Military, Monolith
+		Enemies: Creeps, Military, Bandits, Monolith
 	PlayerReference@Multi14:
 		Name: Multi14
 		Playable: True
 		Faction: Random
-		Enemies: Creeps, Military, Monolith
+		Enemies: Creeps, Military, Bandits, Monolith
 	PlayerReference@Multi15:
 		Name: Multi15
 		Playable: True
 		Faction: Random
-		Enemies: Creeps, Military, Monolith
+		Enemies: Creeps, Military, Bandits, Monolith
 
 Actors:
 	SpawnSE: mpspawn
@@ -9824,6 +9836,167 @@ Actors:
 	Actor3230: wood
 		Owner: Neutral
 		Location: 342,100
+	Actor3232: fenc
+		Owner: Neutral
+		Location: 330,302
+	Actor3233: fenc
+		Owner: Neutral
+		Location: 331,302
+	Actor3234: fenc
+		Owner: Neutral
+		Location: 332,302
+	Actor3235: fenc
+		Owner: Neutral
+		Location: 333,302
+	Actor3236: fenc
+		Owner: Neutral
+		Location: 334,302
+	Actor3237: fenc
+		Owner: Neutral
+		Location: 334,303
+	Actor3238: fenc
+		Owner: Neutral
+		Location: 335,303
+	Actor3239: fenc
+		Owner: Neutral
+		Location: 336,303
+	Actor3240: fenc
+		Owner: Neutral
+		Location: 337,303
+	Actor3241: fenc
+		Owner: Neutral
+		Location: 338,303
+	Actor3242: fenc
+		Owner: Neutral
+		Location: 339,303
+	Actor3243: fenc
+		Owner: Neutral
+		Location: 329,302
+	Actor3244: fenc
+		Owner: Neutral
+		Location: 329,304
+	Actor3245: fenc
+		Owner: Neutral
+		Location: 329,305
+	Actor3246: fenc
+		Owner: Neutral
+		Location: 327,305
+	Actor3247: fenc
+		Owner: Neutral
+		Location: 327,306
+	Actor3248: fenc
+		Owner: Neutral
+		Location: 327,307
+	Actor3249: fenc
+		Owner: Neutral
+		Location: 327,308
+	Actor3250: fenc
+		Owner: Neutral
+		Location: 327,309
+	Actor3251: fenc
+		Owner: Neutral
+		Location: 327,310
+	Actor3252: fenc
+		Owner: Neutral
+		Location: 327,311
+	Actor3253: fenc
+		Owner: Neutral
+		Location: 328,311
+	Actor3254: fenc
+		Owner: Neutral
+		Location: 328,312
+	Actor3255: fenc
+		Owner: Neutral
+		Location: 328,313
+	Actor3256: fenc
+		Owner: Neutral
+		Location: 328,314
+	Actor3257: fenc
+		Owner: Neutral
+		Location: 328,315
+	Actor3258: fenc
+		Owner: Neutral
+		Location: 328,316
+	Actor3259: 3tnk.husk
+		Owner: Neutral
+		Facing: 384
+		Location: 337,306
+	Actor3260: 3tnk.husk
+		Owner: Neutral
+		Facing: 384
+		Location: 333,313
+	Actor3261: 3tnk.husk
+		Owner: Neutral
+		Facing: 384
+		Location: 330,308
+	Actor3262: 2tnk.husk
+		Owner: Neutral
+		Facing: 384
+		Location: 331,309
+	Actor3263: mgg.husk
+		Owner: Neutral
+		Facing: 384
+		Location: 336,306
+	Actor3264: tran.husk1
+		Owner: Neutral
+		Facing: 384
+		Location: 331,313
+	Actor3265: tran.husk2
+		Owner: Neutral
+		Facing: 384
+		Location: 338,308
+	Actor3266: mcv.husk
+		Owner: Neutral
+		Facing: 384
+		Location: 337,315
+	Actor3267: sbag
+		Owner: Neutral
+		Location: 330,304
+	Actor3268: sbag
+		Owner: Neutral
+		Location: 330,305
+	Actor3269: sbag
+		Owner: Neutral
+		Location: 330,306
+	Actor3270: sbag
+		Owner: Neutral
+		Location: 329,306
+	Actor3271: sbag
+		Owner: Neutral
+		Location: 331,304
+	Actor3272: sbag
+		Owner: Neutral
+		Location: 329,307
+	Actor3273: gun
+		Location: 331,305
+		Owner: Bandits
+		TurretFacing: 192
+		Stance: Defend
+	Actor3274: gun
+		Location: 330,307
+		TurretFacing: 192
+		Owner: Bandits
+		Stance: Defend
+	Actor3275: hbox
+		Location: 331,306
+		Owner: Bandits
+		Stance: Defend
+	Actor3276: v03
+		Owner: Bandits
+		Location: 335,307
+	Actor3277: v06
+		Owner: Bandits
+		Location: 339,310
+	Actor3278: v04
+		Owner: Bandits
+		Location: 332,314
+	BanditBase1: waypoint
+		Faction: Random
+		Location: 335,311
+		Owner: Neutral
+	BanditLanding1: waypoint
+		Owner: Neutral
+		Location: 341,314
 
 Rules: rules.yaml
 

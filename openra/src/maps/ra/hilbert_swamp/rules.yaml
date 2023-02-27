@@ -214,6 +214,8 @@ JEEP:
 	Mobile:
 		TurnSpeed: 50
 		PauseOnCondition: notmobile || being-captured
+	Cargo:
+		MaxWeight: 2
 
 DTHTRK:
 	Inherits: ^Vehicle
