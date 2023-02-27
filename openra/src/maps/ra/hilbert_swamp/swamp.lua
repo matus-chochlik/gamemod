@@ -1,10 +1,4 @@
 SetupRaidActors = function(units)
-	units = Utils.Where(
-		units,
-		function(a)
-			return not a.IsDead
-		end
-	)
 	local leader = units[1]
 
 	Utils.Do(
@@ -179,7 +173,8 @@ SpawnBandits = function()
 			EntryNE1, EntryE, EntrySSE1, EntrySE2
 		}
 		local droppoints = {
-			BanditLanding1
+			BanditLanding1, BanditLanding2, BanditLanding3,
+			BanditLanding4
 		}
 		local entry = Utils.Random(spawnpoints)
 		local start = Utils.Random(droppoints)
@@ -196,6 +191,12 @@ SpawnBandits = function()
 		spawned[2],
 		function(bandit)
 			table.insert(band, bandit)
+		end
+	)
+	band = Utils.Where(
+		band,
+		function(a)
+			return not a.IsDead
 		end
 	)
 
