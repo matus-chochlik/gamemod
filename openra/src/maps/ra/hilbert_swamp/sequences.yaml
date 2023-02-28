@@ -49,6 +49,14 @@ spdboat:
 		UseClassicFacings: True
 	icon: jeepicon
 
+bmbr:
+	idle:
+		Facings: 16
+	icon: badricon
+
+badr:
+	icon: badricon
+
 bldskr:
 	stand:
 		Facings: 8

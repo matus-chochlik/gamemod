@@ -8,12 +8,12 @@ World:
 		Ambient: 1.00
 	Locomotor@WHEELED:
 		TerrainSpeeds:
-            Road: 145
-            Bridge: 120
+			Road: 145
+			Bridge: 120
 	Locomotor@HEAVYWHEELED:
 		TerrainSpeeds:
-            Road: 130
-            Bridge: 100
+			Road: 130
+			Bridge: 100
 	Locomotor@SPEEDBOAT:
 		Name: spdboat
 		Crushes: crate
@@ -204,6 +204,85 @@ SNIPER:
 		Condition: cloak-force-disabled
 		ValidDamageStates: Critical
 
+BMBR:
+	Inherits: ^Plane
+	Inherits@AUTOTARGET: ^AutoTargetGround
+	Buildable:
+		Queue: Aircraft
+		BuildAtProductionType: Plane
+		BuildPaletteOrder: 150
+		Prerequisites: ~afld
+		Description: Ground-Attack Plane.\n  Strong vs Buildings\n  Weak vs Infantry, Vehicles, Aircraft
+	ProducibleWithLevel:
+		Prerequisites: aircraft.upgraded
+	Valued:
+		Cost: 250
+	Tooltip:
+		Name: Heavy bomber
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Health:
+		HP: 30000
+	RevealsShroud:
+		MinRange: 10c0
+		Range: 12c0
+		Type: GroundPosition
+		RevealGeneratedShroud: False
+	RevealsShroud@GAPGEN:
+		Range: 10c0
+		Type: GroundPosition
+	Aircraft:
+		CruiseAltitude: 2800
+		TurnSpeed: 16
+		Speed: 190
+		RepulsionSpeed: 10
+		MaximumPitch: 50
+	Contrail@1:
+		Offset: -432,560,0
+	Contrail@2:
+		Offset: -432,-560,0
+	SpawnActorOnDeath:
+		Actor: BADR.Husk
+	SmokeTrailWhenDamaged@0:
+		Offset: -432,560,0
+		Interval: 2
+	SmokeTrailWhenDamaged@1:
+		Offset: -432,-560,0
+		Interval: 2
+	Selectable:
+		Bounds: 38,30,0,2
+		DecorationBounds: 45,33,0,1
+	AutoTarget:
+		InitialStance: HoldFire
+		InitialStanceAI: HoldFire
+	AttackAircraft:
+		AttackRequiresEnteringCell: true
+		FacingTolerance: 50
+		PersistentTargeting: false
+		OpportunityFire: false
+	Armament@PRIMARY:
+		LocalOffset: 0, 250,0
+		Weapon: ParaBomb
+		PauseOnCondition: !ammo
+	Armament@SECONDARY:
+		Name: secondary
+		LocalOffset: 0,-250,0
+		Weapon: ParaBomb
+		PauseOnCondition: !ammo
+	AmmoPool:
+		Ammo: 10
+		ReloadDelay: 9
+		AmmoCondition: ammo
+	Rearmable:
+		RearmActors: afld, afld.ukraine
+	WithAmmoPipsDecoration:
+		Position: BottomLeft
+		Margin: 4, 3
+		RequiresSelection: true
+		PipCount: 10
+	RenderSprites:
+		Image: badr
+
 MIG:
 	Aircraft:
 		TurnSpeed: 20
@@ -303,7 +382,7 @@ RIG:
 	GivesBuildableArea:
 		AreaTypes: building
 	BaseProvider:
-        PauseOnCondition: too-damaged
+		PauseOnCondition: too-damaged
 		Range: 3c0
 	GrantConditionOnDamageState@DISABLE:
 		Condition: too-damaged
@@ -326,14 +405,14 @@ SPDBT:
 		Name: Speedboat
 	Contrail@1:
 		Offset: -256,92,-4
-        TrailWidth: 0c192
-        TrailLength: 10
-        UsePlayerColor: false
+		TrailWidth: 0c192
+		TrailLength: 10
+		UsePlayerColor: false
 	Contrail@2:
 		Offset: -256,-92,-4
-        TrailWidth: 0c192
-        TrailLength: 10
-        UsePlayerColor: false
+		TrailWidth: 0c192
+		TrailLength: 10
+		UsePlayerColor: false
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Health:
@@ -343,7 +422,7 @@ SPDBT:
 	Mobile:
 		Locomotor: spdboat
 		TurnSpeed: 25
-        Speed: 190
+		Speed: 190
 		PauseOnCondition: notmobile || being-captured
 	DamagedByTerrain:
 		Terrain: Beach
@@ -389,12 +468,12 @@ ATLST:
 		Type: Heavy
 	Mobile:
 		Locomotor: atcraft
-        Speed: 130
+		Speed: 130
 		PauseOnCondition: notmobile
-    Targetable:
-        TargetTypes: WaterActor, Ship, GroundActor, Vehicle
-    Repairable:
-          RepairActors: fix
+	Targetable:
+		TargetTypes: WaterActor, Ship, GroundActor, Vehicle
+	Repairable:
+		  RepairActors: fix
 	RevealsShroud:
 		MinRange: 4c0
 		Range: 4c0
