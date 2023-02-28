@@ -211,12 +211,12 @@ BMBR:
 		Queue: Aircraft
 		BuildAtProductionType: Plane
 		BuildPaletteOrder: 150
-		Prerequisites: ~afld
+		Prerequisites: ~afld, stek, ~techlevel.high
 		Description: Ground-Attack Plane.\n  Strong vs Buildings\n  Weak vs Infantry, Vehicles, Aircraft
 	ProducibleWithLevel:
 		Prerequisites: aircraft.upgraded
 	Valued:
-		Cost: 250
+		Cost: 2500
 	Tooltip:
 		Name: Heavy bomber
 	UpdatesPlayerStatistics:
@@ -323,6 +323,13 @@ MH60:
 		CloakTypes: Underwater
 		Range: 6c0
 	RenderDetectionCircle:
+
+CTNK:
+	Valued:
+		Cost: 1500
+	PortableChrono:
+		ChargeDelay: 220
+		MaxDistance: 17
 
 JEEP:
 	Mobile:
