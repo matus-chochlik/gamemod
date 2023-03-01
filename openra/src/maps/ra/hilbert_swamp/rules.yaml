@@ -77,18 +77,30 @@ Player:
 		PowerTypes: powr,apwr,gpwr
 		BuildingFractions:
 			gpwr: 1
+	UnitBuilderBotModule@rush:
+		UnitsToBuild:
+			bmbr: 12
 	BaseBuilderBotModule@normal:
 		PowerTypes: powr,apwr,gpwr
 		BuildingFractions:
 			gpwr: 1
+	UnitBuilderBotModule@normal:
+		UnitsToBuild:
+			bmbr: 15
 	BaseBuilderBotModule@turtle:
 		PowerTypes: powr,apwr,gpwr
 		BuildingFractions:
 			gpwr: 1
+	UnitBuilderBotModule@turtle:
+		UnitsToBuild:
+			bmbr: 14
 	BaseBuilderBotModule@naval:
 		PowerTypes: powr,apwr,gpwr
 		BuildingFractions:
 			gpwr: 1
+	UnitBuilderBotModule@naval:
+		UnitsToBuild:
+			bmbr: 16
 
 
 DOME:
@@ -261,16 +273,16 @@ BMBR:
 		PersistentTargeting: false
 		OpportunityFire: false
 	Armament@PRIMARY:
-		LocalOffset: 0, 250,0
+		LocalOffset: 0, 350,0
 		Weapon: ParaBomb
 		PauseOnCondition: !ammo
 	Armament@SECONDARY:
 		Name: secondary
-		LocalOffset: 0,-250,0
+		LocalOffset: 0,-350,0
 		Weapon: ParaBomb
 		PauseOnCondition: !ammo
 	AmmoPool:
-		Ammo: 10
+		Ammo: 20
 		ReloadDelay: 9
 		AmmoCondition: ammo
 	Rearmable:
