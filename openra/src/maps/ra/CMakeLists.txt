@@ -1,4 +1,5 @@
 add_subdirectory(big_naval)
+add_subdirectory(hilbert_swamp)
 add_subdirectory(jolly_roger)
 add_subdirectory(nooblar)
 add_subdirectory(volcano)
