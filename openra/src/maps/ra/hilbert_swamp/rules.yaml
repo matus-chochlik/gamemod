@@ -66,11 +66,6 @@ World:
 		Name: effect
 		Filename: temperat.pal
 		ShadowIndex: 4
-	PaletteFromFile@colorpicker:
-		Name: colorpicker
-		Filename: temperat.pal
-		ShadowIndex: 4
-		AllowModifiers: false
 
 Player:
 	BaseBuilderBotModule@rush:
@@ -110,7 +105,7 @@ DOME:
 		TargetableOffsets: 0,0,0, 840,0,0, 840,-1024,0, 420,768,0, -840,0,0, -840,-1024,0, -840,1024,0
 	Selectable:
 		Priority: 0
-		Bounds: 72,48
+		Bounds: 3072, 2048
 	Building:
 		Footprint: xxx xxx ===
 		Dimensions: 3,3
@@ -135,9 +130,6 @@ GPWR:
 	Inherits: ^Building
 	Inherits@POWER_OUTAGE: ^DisabledByPowerOutage
 	Inherits@shape: ^2x1Shape
-	HitShape:
-		UseTargetableCellsOffsets: false
-		TargetableOffsets: 0,0,0, 630,-384,0, 630,384,0, -700,-512,0, -700,512,0
 	Buildable:
 		Queue: Building
 		BuildPaletteOrder: 220
@@ -154,8 +146,8 @@ GPWR:
 		Footprint: xx
 		Dimensions: 2,1
 	Selectable:
-		Bounds: 48,28,0,2
-		DecorationBounds: 50,50,0,-12
+		Bounds: 2048, 1194, 0, 85
+		DecorationBounds: 2133, 2133, 0, -512
 	Health:
 		HP: 100000
 	Armor:
@@ -272,8 +264,8 @@ BMBR:
     GrantConditionOnDamageState@SmokeTrail:
         Condition: enable-smoke
 	Selectable:
-		Bounds: 38,30,0,2
-		DecorationBounds: 45,33,0,1
+		Bounds: 1536, 1194, 0, 85
+		DecorationBounds: 1706, 1237, 0, 42
 	AutoTarget:
 		InitialStance: HoldFire
 		InitialStanceAI: HoldFire
@@ -518,7 +510,7 @@ ATLST:
 		LoadingCondition: notmobile
 	-Chronoshiftable:
 	Selectable:
-		DecorationBounds: 36,36
+		DecorationBounds: 1536, 1536
 	DamagedByTerrain:
 		Terrain: Rough
 		Damage: 20
