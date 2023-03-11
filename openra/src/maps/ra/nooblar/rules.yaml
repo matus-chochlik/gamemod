@@ -26,8 +26,7 @@ World:
 		MinMoveDelay: 80
 		MaxMoveDelay: 120
 	Selectable:
-		Bounds: 24,24,0,-5
-		DecorationBounds: 30,30,0,-2
+		Bounds: 1024, 1024
 	-Crushable:
 	RenderSprites:
 		Palette: desert
