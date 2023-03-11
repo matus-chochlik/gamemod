@@ -255,12 +255,22 @@ BMBR:
 		Offset: -432,-560,0
 	SpawnActorOnDeath:
 		Actor: BADR.Husk
-	SmokeTrailWhenDamaged@0:
-		Offset: -432,560,0
-		Interval: 2
-	SmokeTrailWhenDamaged@1:
-		Offset: -432,-560,0
-		Interval: 2
+    LeavesTrails@0:
+		Offsets: -432,560,0
+		MovingInterval: 2
+        Image: smokey
+        SpawnAtLastPosition: False
+        Type: CenterPosition
+        RequiresCondition: enable-smoke
+    LeavesTrails@1:
+		Offsets: -432,-560,0
+		MovingInterval: 2
+        Image: smokey
+        SpawnAtLastPosition: False
+        Type: CenterPosition
+        RequiresCondition: enable-smoke
+    GrantConditionOnDamageState@SmokeTrail:
+        Condition: enable-smoke
 	Selectable:
 		Bounds: 38,30,0,2
 		DecorationBounds: 45,33,0,1

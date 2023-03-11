@@ -1,17 +1,20 @@
-World:
-	ResourceType@corium:
-		Type: Corium
-		Name: Radioactive contamination
-		ResourceType: 3
-		TerrainType: Gems
-		Palette: player
-		Sequences: gold01,gold02,gold03,gold04
-		MaxDensity: 4
-		ValuePerUnit: 75
-		AllowedTerrainTypes: Clear,Road
-		AllowUnderActors: true
+^BaseWorld:
 	ResourceRenderer:
-		RenderTypes: Ore, Gems, Corium
+        ResourceTypes:
+            Corium:
+                Sequences: gold01, gold02, gold03, gold04
+                Palette: player
+                Name: Radioactive contamination
+
+World:
+    ResourceLayer:
+        Corium:
+            ResourceIndex: 3
+            TerrainType: Gems
+            MaxDensity: 4
+            ValuePerUnit: 75
+            AllowedTerrainTypes: Clear,Road
+            AllowUnderActors: true
 	Locomotor@FOOT:
 		TerrainSpeeds:
 			Gems: 70
@@ -34,6 +37,14 @@ World:
 				PathingCost: 200
 	LuaScript:
 		Scripts: volcano.lua
+
+EditorWorld:
+    EditorResourceLayer:
+        Corium:
+            ResourceIndex: 3
+            TerrainType: Gems
+            TerrainType: Clear, Road
+            MaxDensity: 4
 
 Player:
 	BaseBuilderBotModule@rush:

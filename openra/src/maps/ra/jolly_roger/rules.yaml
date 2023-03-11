@@ -1,6 +1,4 @@
 World:
-	SpawnMPUnits:
-	MPStartLocations:
 	LuaScript:
 		Scripts: roger.lua
 
