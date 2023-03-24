@@ -270,10 +270,9 @@ BMBR:
 		InitialStance: HoldFire
 		InitialStanceAI: HoldFire
 	AttackAircraft:
-		AttackRequiresEnteringCell: true
 		FacingTolerance: 50
-		PersistentTargeting: false
-		OpportunityFire: false
+		PersistentTargeting: False
+		OpportunityFire: False
 	Armament@PRIMARY:
 		LocalOffset: 0, 350,0
 		Weapon: ParaBomb
