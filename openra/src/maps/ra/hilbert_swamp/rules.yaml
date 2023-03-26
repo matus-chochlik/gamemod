@@ -239,7 +239,8 @@ BMBR:
 		CruiseAltitude: 2800
 		TurnSpeed: 16
 		Speed: 190
-		RepulsionSpeed: 10
+		Repulsable: True
+		RepulsionSpeed: 13
 		MaximumPitch: 50
 	Contrail@1:
 		Offset: -432,560,0
@@ -247,22 +248,22 @@ BMBR:
 		Offset: -432,-560,0
 	SpawnActorOnDeath:
 		Actor: BADR.Husk
-    LeavesTrails@0:
+	LeavesTrails@0:
 		Offsets: -432,560,0
 		MovingInterval: 2
-        Image: smokey
-        SpawnAtLastPosition: False
-        Type: CenterPosition
-        RequiresCondition: enable-smoke
-    LeavesTrails@1:
+		Image: smokey
+		SpawnAtLastPosition: False
+		Type: CenterPosition
+		RequiresCondition: enable-smoke
+	LeavesTrails@1:
 		Offsets: -432,-560,0
 		MovingInterval: 2
-        Image: smokey
-        SpawnAtLastPosition: False
-        Type: CenterPosition
-        RequiresCondition: enable-smoke
-    GrantConditionOnDamageState@SmokeTrail:
-        Condition: enable-smoke
+		Image: smokey
+		SpawnAtLastPosition: False
+		Type: CenterPosition
+		RequiresCondition: enable-smoke
+	GrantConditionOnDamageState@SmokeTrail:
+		Condition: enable-smoke
 	Selectable:
 		Bounds: 1536, 1194, 0, 85
 		DecorationBounds: 1706, 1237, 0, 42
@@ -283,7 +284,7 @@ BMBR:
 		Weapon: ParaBomb
 		PauseOnCondition: !ammo
 	AmmoPool:
-		Ammo: 20
+		Ammo: 16
 		ReloadDelay: 9
 		AmmoCondition: ammo
 	Rearmable:
@@ -292,7 +293,7 @@ BMBR:
 		Position: BottomLeft
 		Margin: 4, 3
 		RequiresSelection: true
-		PipCount: 10
+		PipCount: 8
 	RenderSprites:
 		Image: badr
 
