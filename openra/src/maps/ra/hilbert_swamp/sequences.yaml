@@ -25,6 +25,42 @@ atlst:
 		ZOffset: -511
 	icon: lsticon
 
+astp:
+	idle: astp
+		Tick: 120
+		ZOffset: -1023
+	damaged-idle: astp
+		Start: 16
+		Tick: 120
+		ZOffset: -1023
+	active: astp
+		Length: 16
+		Tick: 120
+		ZOffset: -1023
+	damaged-active: astp
+		Start: 16
+		Length: 16
+		Tick: 120
+		ZOffset: -1023
+	idle-dish: astp_d
+		Length: 16
+		Tick: 160
+	damaged-idle-dish: astp_d
+		Start: 16
+		Length: 16
+		Tick: 160
+	dead: astp
+		Start: 32
+		ZOffset: -1023
+		Tick: 800
+	make: astpmake
+		Length: *
+		Tick: 80
+	bib: bib1
+		UseTilesetExtension: true
+		Length: *
+	icon: afldicon
+
 miss:
     icon: domeicon
 
@@ -55,6 +91,15 @@ bmbr:
 	icon: badricon
 
 badr:
+	icon: badricon
+
+a10:
+	idle: a10
+		Facings: 32
+		UseClassicFacings: True
+	muzzle: minigun
+		Length: 6
+		Facings: 8
 	icon: badricon
 
 bldskr:
