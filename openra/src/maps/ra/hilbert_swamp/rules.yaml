@@ -70,32 +70,56 @@ World:
 Player:
 	BaseBuilderBotModule@rush:
 		PowerTypes: powr,apwr,gpwr
+        ProductionTypes: barr,tent,weap,afld,astp,hpad
 		BuildingFractions:
 			gpwr: 1
+            astp: 4
 	UnitBuilderBotModule@rush:
 		UnitsToBuild:
 			bmbr: 12
+			a10: 12
+    SquadManagerBotModule@rush:
+        AirUnitsTypes: mig, yak, bmbr, a10, heli, hind, mh60
+        ProtectionTypes: harv, mcv, mslo, gap, spen, syrd, iron, pdox, tsla, agun, dome, pbox, hbox, gun, ftur, sam, atek, weap, fact, proc, silo, hpad, afld, afld.ukraine, astp, powr, apwr, stek, barr, kenn, tent, fix, fpwr, tenf, syrf, spef, weaf, domf, fixf, fapw, atef, pdof, mslf, facf
 	BaseBuilderBotModule@normal:
 		PowerTypes: powr,apwr,gpwr
+        ProductionTypes: barr,tent,weap,afld,astp,hpad
 		BuildingFractions:
 			gpwr: 1
+            astp: 4
 	UnitBuilderBotModule@normal:
 		UnitsToBuild:
 			bmbr: 15
+			a10: 15
+    SquadManagerBotModule@normal:
+        AirUnitsTypes: mig, yak, bmbr, a10, heli, hind, mh60
+        ProtectionTypes: harv, mcv, mslo, gap, spen, syrd, iron, pdox, tsla, agun, dome, pbox, hbox, gun, ftur, sam, atek, weap, fact, proc, silo, hpad, afld, afld.ukraine, astp, powr, apwr, stek, barr, kenn, tent, fix, fpwr, tenf, syrf, spef, weaf, domf, fixf, fapw, atef, pdof, mslf, facf
 	BaseBuilderBotModule@turtle:
 		PowerTypes: powr,apwr,gpwr
+        ProductionTypes: barr,tent,weap,afld,astp,hpad
 		BuildingFractions:
 			gpwr: 1
+            astp: 2
 	UnitBuilderBotModule@turtle:
 		UnitsToBuild:
-			bmbr: 14
+			bmbr: 10
+			a10: 10
+    SquadManagerBotModule@turtle:
+        AirUnitsTypes: mig, yak, bmbr, a10, heli, hind, mh60
+        ProtectionTypes: harv, mcv, mslo, gap, spen, syrd, iron, pdox, tsla, agun, dome, pbox, hbox, gun, ftur, sam, atek, weap, fact, proc, silo, hpad, afld, afld.ukraine, astp, powr, apwr, stek, barr, kenn, tent, fix, fpwr, tenf, syrf, spef, weaf, domf, fixf, fapw, atef, pdof, mslf, facf
 	BaseBuilderBotModule@naval:
 		PowerTypes: powr,apwr,gpwr
+        ProductionTypes: barr,tent,weap,afld,astp,hpad
 		BuildingFractions:
 			gpwr: 1
+            astp: 8
 	UnitBuilderBotModule@naval:
 		UnitsToBuild:
 			bmbr: 16
+            a10: 18
+    SquadManagerBotModule@naval:
+        AirUnitsTypes: mig, yak, bmbr, a10, heli, hind, mh60
+        ProtectionTypes: harv, mcv, mslo, gap, spen, syrd, iron, pdox, tsla, agun, dome, pbox, hbox, gun, ftur, sam, atek, weap, fact, proc, silo, hpad, afld, afld.ukraine, astp, powr, apwr, stek, barr, kenn, tent, fix, fpwr, tenf, syrf, spef, weaf, domf, fixf, fapw, atef, pdof, mslf, facf
 
 
 DOME:
